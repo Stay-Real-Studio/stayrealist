@@ -12,16 +12,16 @@
     "next": "^13.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-native-web": "^0.18.4",
+    "react-native-web": "^0.19.5",
     "ui": "*"
   },
   "devDependencies": {
     "@types/node": "^18.11.5",
-    "@types/react": "^18.2.5",
+    "@types/react": "~18.0.27",
     "@types/react-dom": "^18.2.4",
     "babel-plugin-react-native-web": "^0.18.4",
     "eslint": "^8.19.0",
     "tsconfig": "*",
-    "typescript": "^4.7.4"
+    "typescript": "^4.9.4"
   }
 }
