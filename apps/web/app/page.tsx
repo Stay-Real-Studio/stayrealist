@@ -8,7 +8,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
 
-const SrlMap = dynamic(() => import('../components/map.component'), {
+const SrlMap: any = dynamic(() => import('../components/map.component'), {
   ssr: false,
 });
 

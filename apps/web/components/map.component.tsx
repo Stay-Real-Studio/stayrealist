@@ -1,13 +1,10 @@
-/* global fetch */
-import React, {useState, useMemo, useEffect} from 'react';
-import {createRoot} from 'react-dom/client';
-import {Map} from 'react-map-gl';
+import React, { useState, useMemo } from 'react';
+import { Map } from 'react-map-gl';
 import maplibregl from 'maplibre-gl';
 import DeckGL from '@deck.gl/react';
-import {GeoJsonLayer, ArcLayer} from '@deck.gl/layers';
-import {scaleQuantile} from 'd3-scale';
+import { GeoJsonLayer, ArcLayer } from '@deck.gl/layers';
+import { scaleQuantile } from 'd3-scale';
 import { useData } from '../composables/useData.hooks';
-
 
 // Set your mapbox access token here
 const MAPBOX_ACCESS_TOKEN =
@@ -20,7 +17,7 @@ export const inFlowColors = [
   [65, 182, 196],
   [29, 145, 192],
   [34, 94, 168],
-  [12, 44, 132]
+  [12, 44, 132],
 ];
 
 export const outFlowColors = [
@@ -30,7 +27,7 @@ export const outFlowColors = [
   [253, 141, 60],
   [252, 78, 42],
   [227, 26, 28],
-  [177, 0, 38]
+  [177, 0, 38],
 ];
 
 const INITIAL_VIEW_STATE = {
@@ -39,31 +36,32 @@ const INITIAL_VIEW_STATE = {
   zoom: 3,
   maxZoom: 15,
   pitch: 30,
-  bearing: 30
+  bearing: 30,
 };
 
-const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-nolabels-gl-style/style.json';
+const MAP_STYLE =
+  'https://basemaps.cartocdn.com/gl/positron-nolabels-gl-style/style.json';
 
 function calculateArcs(data, selectedCounty) {
   if (!data || !data.length) {
     return null;
   }
   if (!selectedCounty) {
-    selectedCounty = data.find(f => f.properties.name === 'Los Angeles, CA');
+    selectedCounty = data.find((f) => f.properties.name === 'Los Angeles, CA');
   }
-  const {flows, centroid} = selectedCounty.properties;
+  const { flows, centroid } = selectedCounty.properties;
 
-  const arcs = Object.keys(flows).map(toId => {
+  const arcs = Object.keys(flows).map((toId) => {
     const f = data[toId];
     return {
       source: centroid,
       target: f.properties.centroid,
-      value: flows[toId]
+      value: flows[toId],
     };
   });
 
   const scale = scaleQuantile()
-    .domain(arcs.map(a => Math.abs(a.value)))
+    .domain(arcs.map((a) => Math.abs(a.value)))
     .range(inFlowColors.map((c, i) => i));
 
   arcs.forEach((a: any) => {
@@ -74,22 +72,27 @@ function calculateArcs(data, selectedCounty) {
   return arcs;
 }
 
-function getTooltip({object}) {
+function getTooltip({ object }) {
   return object && object.properties.name;
 }
 
-/* eslint-disable react/no-deprecated */
-export default function SrlMap({strokeWidth = 1, mapStyle = MAP_STYLE}) {
+export default function SrlMap({
+  strokeWidth = 1,
+  mapStyle = MAP_STYLE,
+}: {
+  strokeWidth: number,
+  mapStyle: string,
+}) {
   const [selectedCounty, selectCounty] = useState(null);
 
-  const {isLoading, data} = useData()
+  const { isLoading, data } = useData();
 
   const arcs = useMemo(() => {
-    if(!data) return []
-    return calculateArcs(data.features, selectedCounty)
+    if (!data) return [];
+    return calculateArcs(data.features, selectedCounty);
   }, [data, selectedCounty]);
 
-  if(isLoading) return
+  if (isLoading) return;
 
   const layers = [
     new GeoJsonLayer({
@@ -98,18 +101,20 @@ export default function SrlMap({strokeWidth = 1, mapStyle = MAP_STYLE}) {
       stroked: false,
       filled: true,
       getFillColor: [0, 0, 0, 0],
-      onClick: ({object}) => selectCounty(object),
-      pickable: true
+      onClick: ({ object }) => selectCounty(object),
+      pickable: true,
     }),
     new ArcLayer({
       id: 'arc',
       data: arcs,
-      getSourcePosition: d => d.source,
-      getTargetPosition: d => d.target,
-      getSourceColor: d => (d.gain > 0 ? inFlowColors : outFlowColors)[d.quantile],
-      getTargetColor: d => (d.gain > 0 ? outFlowColors : inFlowColors)[d.quantile],
-      getWidth: strokeWidth
-    })
+      getSourcePosition: (d) => d.source,
+      getTargetPosition: (d) => d.target,
+      getSourceColor: (d) =>
+        (d.gain > 0 ? inFlowColors : outFlowColors)[d.quantile],
+      getTargetColor: (d) =>
+        (d.gain > 0 ? outFlowColors : inFlowColors)[d.quantile],
+      getWidth: strokeWidth,
+    }),
   ];
 
   return (
@@ -119,7 +124,12 @@ export default function SrlMap({strokeWidth = 1, mapStyle = MAP_STYLE}) {
       controller={true}
       getTooltip={getTooltip}
     >
-      <Map reuseMaps mapLib={maplibregl} mapStyle={mapStyle} mapboxAccessToken={MAPBOX_ACCESS_TOKEN} />
+      <Map
+        reuseMaps
+        mapLib={maplibregl}
+        mapStyle={mapStyle}
+        mapboxAccessToken={MAPBOX_ACCESS_TOKEN}
+      />
     </DeckGL>
   );
 }
