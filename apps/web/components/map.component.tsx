@@ -6,15 +6,12 @@ import maplibregl from 'maplibre-gl';
 import DeckGL from '@deck.gl/react';
 import {GeoJsonLayer, ArcLayer} from '@deck.gl/layers';
 import {scaleQuantile} from 'd3-scale';
+import { useData } from '../composables/useData.hooks';
 
 
 // Set your mapbox access token here
 const MAPBOX_ACCESS_TOKEN =
   'pk.eyJ1IjoiaGFvaGFvc3RheXJlYWwiLCJhIjoiY2xqMGpucGl6MGZmdzNocGJnMGFxY2V4ZyJ9.Zfi3hY69IyAtXK8fd6PCqg';
-
-// Source data GeoJSON
-const DATA_URL =
-  'https://raw.githubusercontent.com/visgl/deck.gl-data/master/examples/arc/counties.json'; // eslint-disable-line
 
 export const inFlowColors = [
   [255, 255, 204],
@@ -84,18 +81,15 @@ function getTooltip({object}) {
 /* eslint-disable react/no-deprecated */
 export default function SrlMap({strokeWidth = 1, mapStyle = MAP_STYLE}) {
   const [selectedCounty, selectCounty] = useState(null);
-  const [data, setData] = useState({});
-  if(!data) return;
-  useEffect (()=> {
-    fetch(DATA_URL)
-    .then(response => response.json())
-    .then(({features}) => {
-      setData(features)
-    }),
-    []
-  })
 
-  const arcs = useMemo(() => calculateArcs(data, selectedCounty), [data, selectedCounty]);
+  const {isLoading, data} = useData()
+
+  const arcs = useMemo(() => {
+    if(!data) return []
+    return calculateArcs(data.features, selectedCounty)
+  }, [data, selectedCounty]);
+
+  if(isLoading) return
 
   const layers = [
     new GeoJsonLayer({
@@ -125,7 +119,7 @@ export default function SrlMap({strokeWidth = 1, mapStyle = MAP_STYLE}) {
       controller={true}
       getTooltip={getTooltip}
     >
-      <Map reuseMaps mapLib={maplibregl} mapStyle={mapStyle} />
+      <Map reuseMaps mapLib={maplibregl} mapStyle={mapStyle} mapboxAccessToken={MAPBOX_ACCESS_TOKEN} />
     </DeckGL>
   );
 }
