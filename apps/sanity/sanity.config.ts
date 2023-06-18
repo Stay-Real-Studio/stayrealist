@@ -8,7 +8,7 @@ const devOnlyPlugins = [getStartedPlugin()]
 
 export default defineConfig({
   name: 'default',
-  title: 'silver-pheasant',
+  title: 'Stay Real List',
 
   projectId: 'kfoyr571',
   dataset: 'production',
