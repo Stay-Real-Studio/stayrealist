@@ -1,5 +1,5 @@
-import pet from "./pet";
+import coin from "./coin";
 
 export const schemaTypes = [
-    pet
+    coin
 ]

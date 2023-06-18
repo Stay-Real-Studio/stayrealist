@@ -1,8 +1,7 @@
-// schemas/pet.js
 export default {
-  name: 'pet',
+  name: 'coin',
   type: 'document',
-	title: 'Pet',
+	title: 'Coin',
   fields: [
     {
       name: 'name',
