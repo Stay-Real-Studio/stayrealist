@@ -1,8 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Map } from 'react-map-gl';
-import maplibregl from 'maplibre-gl';
 import DeckGL from '@deck.gl/react';
-import { GeoJsonLayer, ArcLayer } from '@deck.gl/layers';
+import { GeoJsonLayer, ArcLayer, ScatterplotLayer } from '@deck.gl/layers';
 import { scaleQuantile } from 'd3-scale';
 import { useData } from '../composables/useData.hooks';
 
@@ -31,9 +30,9 @@ export const outFlowColors = [
 ];
 
 const INITIAL_VIEW_STATE = {
-  longitude: -100,
-  latitude: 40.7,
-  zoom: 3,
+  longitude: -122.402,
+  latitude:  37.79,
+  zoom: 13,
   maxZoom: 15,
   pitch: 30,
   bearing: 30,
@@ -73,6 +72,7 @@ function calculateArcs(data, selectedCounty) {
 }
 
 function getTooltip({ object }) {
+  console.log(object)
   return object && object.properties.name;
 }
 
@@ -103,6 +103,16 @@ export default function SrlMap({
       getFillColor: [0, 0, 0, 0],
       onClick: ({ object }) => selectCounty(object),
       pickable: true,
+    }), 
+    new ScatterplotLayer({
+      id: 'deckgl-circle',
+      data: [
+        {position: [-122.402, 37.79], color: [255, 0, 0], radius: 1000}
+      ],
+      getPosition: d => d.position,
+      getFillColor: d => d.color,
+      getRadius: d => d.radius,
+      opacity: 0.7
     }),
     new ArcLayer({
       id: 'arc',
@@ -115,6 +125,17 @@ export default function SrlMap({
         (d.gain > 0 ? outFlowColors : inFlowColors)[d.quantile],
       getWidth: strokeWidth,
     }),
+    new ArcLayer({
+      id: 'deckgl-arc',
+      data: [
+        {source: [-122.3998664, 37.7883697], target: [-122.400068, 37.7900503]}
+      ],
+      getSourcePosition: d => d.source,
+      getTargetPosition: d => d.target,
+      getSourceColor: [255, 208, 0],
+      getTargetColor: [0, 128, 255],
+      getWidth: 8
+    }),
   ];
 
   return (
@@ -126,7 +147,6 @@ export default function SrlMap({
     >
       <Map
         reuseMaps
-        mapLib={maplibregl}
         mapStyle={mapStyle}
         mapboxAccessToken={MAPBOX_ACCESS_TOKEN}
       />
