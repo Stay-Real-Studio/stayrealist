@@ -70,7 +70,6 @@ function calculateArcs(data, selectedCounty) {
 }
 
 function getTooltip({ object }) {
-  console.log(object)
   return object && object.properties.name;
 }
 
