@@ -8,11 +8,16 @@ const fetchData = () => fetch(DATA_URL).then((response) => response.json());
 const fetchCoins = () => fetch(COINS_URL).then((response) => response.json());
 
 export const useData = () => {
-  return useQuery(['data'], fetchData);
+  return useQuery(['data'], fetchData, {
+    refetchOnWindowFocus: false,
+  });
 };
 
 export const useCoins = () => {
   return useQuery(['coins'], fetchCoins, {
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: false,
+    select(data) {
+      return data.result
+    },
   });
 };
