@@ -5,9 +5,7 @@ import { GeoJsonLayer, ArcLayer, ScatterplotLayer } from '@deck.gl/layers';
 import { scaleQuantile } from 'd3-scale';
 import { useData } from '../composables/useData.hooks';
 
-// Set your mapbox access token here
-const MAPBOX_ACCESS_TOKEN =
-  'pk.eyJ1IjoiaGFvaGFvc3RheXJlYWwiLCJhIjoiY2xqMGpucGl6MGZmdzNocGJnMGFxY2V4ZyJ9.Zfi3hY69IyAtXK8fd6PCqg';
+const mapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_DEFAULT_PUBLIC_ACCESS_TOKEN;
 
 export const inFlowColors = [
   [255, 255, 204],
@@ -148,7 +146,7 @@ export default function SrlMap({
       <Map
         reuseMaps
         mapStyle={mapStyle}
-        mapboxAccessToken={MAPBOX_ACCESS_TOKEN}
+        mapboxAccessToken={mapboxAccessToken}
       />
     </DeckGL>
   );
