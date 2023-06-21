@@ -11,12 +11,17 @@
   "dependencies": {
     "@mapbox/tiny-sdf": "^2.0.6",
     "@tanstack/react-query": "^4.29.14",
+    "accept-language": "^3.0.18",
     "deck.gl": "^8.9.19",
+    "i18next": "^23.2.1",
+    "i18next-browser-languagedetector": "^7.0.2",
+    "i18next-resources-to-backend": "^1.1.4",
     "mapbox-gl": "^2.15.0",
     "maplibre-gl": "^3.1.0",
     "next": "^13.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-i18next": "^13.0.0",
     "react-map-gl": "^7.0.25",
     "react-native-web": "^0.19.5",
     "ui": "*"
@@ -29,6 +34,6 @@
     "babel-plugin-react-native-web": "^0.18.4",
     "eslint": "^8.19.0",
     "tsconfig": "*",
-    "typescript": "^4.9.4"
+    "typescript": "^5.1.3"
   }
 }
