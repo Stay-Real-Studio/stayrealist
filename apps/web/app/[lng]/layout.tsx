@@ -8,8 +8,8 @@ export async function generateStaticParams() {
 
 export default function RootLayout({ children, params: { lng } }) {
   return (
-    <div lang={lng} dir={dir(lng)} suppressHydrationWarning={true}>
-      {children}
-    </div>
+    <html lang={lng} dir={dir(lng)}>
+      <body>{children}</body>
+    </html>
   );
 }
