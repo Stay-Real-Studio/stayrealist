@@ -6,6 +6,7 @@ import { Footer } from '../components/Footer/client'
 import { useState } from 'react'
 
 export default function Page({ params: { lng } }) {
+  console.log(lng)
   const { t } = useTranslation(lng, 'client-page')
   const [counter, setCounter] = useState(0)
   return (
