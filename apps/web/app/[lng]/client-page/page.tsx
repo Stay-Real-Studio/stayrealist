@@ -8,6 +8,7 @@ import { useState } from 'react'
 export default function Page({ params: { lng } }) {
   console.log(lng)
   const { t } = useTranslation(lng, 'client-page')
+  console.log(t('back-to-home'))
   const [counter, setCounter] = useState(0)
   return (
     <>
