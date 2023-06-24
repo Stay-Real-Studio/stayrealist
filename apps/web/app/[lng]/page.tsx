@@ -6,9 +6,6 @@ import { Footer } from './components/Footer';
 export default async function Page({ params: { lng } }) {
   const { t } = await useTranslation(lng);
   const coins = await getCoins()
-
-  console.log(coins)
-  console.log(lng)
   
   return (
     <>
