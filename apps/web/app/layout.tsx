@@ -1,11 +1,7 @@
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function Layout({ children }) {
   return (
     <>
       {children}
     </>
-  );
+  )
 }
