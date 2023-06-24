@@ -4,12 +4,14 @@ import Link from 'next/link'
 import { useTranslation } from '../../i18n/client'
 import { Footer } from '../components/Footer/client'
 import { useState } from 'react'
+import { Button } from 'ui'
+import { LanguageType } from '../../../types/i18n.types'
 
-export default function Page({ params: { lng } }) {
-  console.log(lng)
+export default function Page({ params: { lng } }:{ params: { lng:LanguageType } }) {
   const { t } = useTranslation(lng, 'client-page')
-  console.log(t('back-to-home'))
+
   const [counter, setCounter] = useState(0)
+
   return (
     <>
       <h1>{t('title')}</h1>
@@ -23,6 +25,7 @@ export default function Page({ params: { lng } }) {
           {t('back-to-home')}
         </button>
       </Link>
+      <Button text='hey' onClick={() => { }}></Button>
       <Footer lng={lng} />
     </>
   )
