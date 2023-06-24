@@ -1,6 +1,6 @@
 import { dir } from 'i18next';
 
-const languages = ['en', 'de'];
+const languages = ['en', 'zh-CN'];
 
 export async function generateStaticParams() {
   return languages.map((lng) => ({ lng }));
