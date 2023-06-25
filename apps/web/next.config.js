@@ -15,4 +15,8 @@ module.exports = {
     ];
     return config;
   },
+  transpilePackages: ['@deck.gl/layers', '@mapbox/tiny-sdf'],
+  experimental: {
+    esmExternals: 'loose',
+  },
 };

@@ -4,7 +4,7 @@ import { languages } from '../../../i18n/settings'
 
 export const FooterBase = ({ t, lng }) => {
   return (
-    <footer style={{ marginTop: 50 }}>
+    <footer style={{ marginTop: 50 }} className="z-10">
       <Trans i18nKey="languageSwitcher" t={t}>
         Switch from <strong>{lng}</strong> to:{' '}
       </Trans>

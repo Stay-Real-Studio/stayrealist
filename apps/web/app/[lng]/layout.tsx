@@ -1,4 +1,5 @@
 import { dir } from 'i18next';
+import Providers from '../../components/providers';
 
 const languages = ['en', 'zh-CN'];
 
@@ -9,7 +10,9 @@ export async function generateStaticParams() {
 export default function RootLayout({ children, params: { lng } }) {
   return (
     <html lang={lng} dir={dir(lng)}>
-      <body>{children}</body>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

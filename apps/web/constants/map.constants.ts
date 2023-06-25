@@ -7,7 +7,7 @@ export const MAP_STYLE =
 export const INITIAL_VIEW_STATE = {
   longitude: -122.402,
   latitude: 37.79,
-  zoom: 10,
+  zoom: 7,
   maxZoom: 15,
   pitch: 30,
   bearing: 30,

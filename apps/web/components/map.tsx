@@ -3,22 +3,25 @@ import { Map } from 'react-map-gl';
 import DeckGL from '@deck.gl/react';
 import { GeoJsonLayer, ArcLayer, ScatterplotLayer } from '@deck.gl/layers';
 import { calculateArcs, getTooltip } from '../composables/map.functions';
-import { INITIAL_VIEW_STATE, MAP_STYLE, inFlowColors, mapboxAccessToken, outFlowColors } from '../constants/map.constants';
+import {
+  INITIAL_VIEW_STATE,
+  MAP_STYLE,
+  inFlowColors,
+  mapboxAccessToken,
+  outFlowColors,
+} from '../constants/map.constants';
 import { useData, useCoins } from '../composables/map.hooks';
 
 export default function SrMap({
   strokeWidth = 1,
   mapStyle = MAP_STYLE,
 }: {
-  strokeWidth: number;
-  mapStyle: string;
+  strokeWidth?: number;
+  mapStyle?: string;
 }) {
   const [selectedCounty, selectCounty] = useState(null);
   const { isLoading, data } = useData();
-  const {
-    isLoading: isLoadingCoins,
-    data: coins,
-  } = useCoins();
+  const { isLoading: isLoadingCoins, data: coins } = useCoins();
 
   const arcs = useMemo(() => {
     if (!data) return [];
@@ -27,7 +30,7 @@ export default function SrMap({
   }, [data, selectedCounty]);
 
   if (isLoading) return;
-  if (!isLoadingCoins) console.log( coins );
+  if (!isLoadingCoins) console.log(coins);
 
   const layers = [
     new GeoJsonLayer({
@@ -41,11 +44,13 @@ export default function SrMap({
     }),
     new ScatterplotLayer({
       id: 'deckgl-circle',
-      data: [{ 
-        position: [-122.402, 37.79], 
-        color: [255, 0, 0], 
-        radius: 1000
-       }],
+      data: [
+        {
+          position: [-122.402, 37.79],
+          color: [255, 0, 0],
+          radius: 1000,
+        },
+      ],
       getPosition: (d) => d.position,
       getFillColor: (d) => d.color,
       getRadius: (d) => d.radius,
@@ -79,17 +84,17 @@ export default function SrMap({
   ];
 
   return (
-    <DeckGL
-      layers={layers}
-      initialViewState={INITIAL_VIEW_STATE}
-      controller={true}
-      getTooltip={getTooltip}
-    >
-      <Map
-        reuseMaps
-        mapStyle={mapStyle}
-        mapboxAccessToken={mapboxAccessToken}
-      />
-    </DeckGL>
+      <DeckGL
+        layers={layers}
+        initialViewState={INITIAL_VIEW_STATE}
+        controller={true}
+        getTooltip={getTooltip}
+      >
+        <Map
+          reuseMaps
+          mapStyle={mapStyle}
+          mapboxAccessToken={mapboxAccessToken}
+        />
+      </DeckGL>
   );
 }
