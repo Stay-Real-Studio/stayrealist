@@ -1,5 +1,4 @@
-export const mapboxAccessToken =
-  process.env.NEXT_PUBLIC_MAPBOX_DEFAULT_PUBLIC_ACCESS_TOKEN;
+export const MapboxAccessToken = 'pk.eyJ1IjoiaGFvaGFvc3RheXJlYWwiLCJhIjoiY2xqMmF0NXBxMHV2djNwbW85aGNrN2h5ZSJ9.GR6n1aI6xVS-F9PDP2VE2w';
 
 export const MAP_STYLE =
   'https://basemaps.cartocdn.com/gl/positron-nolabels-gl-style/style.json';

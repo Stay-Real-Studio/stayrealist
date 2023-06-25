@@ -25,14 +25,8 @@ This Turborepo has some additional tools already setup for you:
 
 
 ## How to start?
-1. For Mapbox to render properly, `/app/web/.env.local` is needed, like
 
-    ```
-    NEXT_PUBLIC_MAPBOX_DEFAULT_PUBLIC_ACCESS_TOKEN=pk.eyJ.. 
-    ```
-
-1. Run command to start: 
-    ```sh
-    yarn install
-    yarn dev
-    ```
+```sh
+yarn install
+yarn dev
+```

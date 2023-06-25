@@ -7,7 +7,7 @@ import {
   INITIAL_VIEW_STATE,
   MAP_STYLE,
   inFlowColors,
-  mapboxAccessToken,
+  MapboxAccessToken,
   outFlowColors,
 } from '../constants/map.constants';
 import { useData, useCoins } from '../composables/map.hooks';
@@ -93,7 +93,7 @@ export default function SrMap({
         <Map
           reuseMaps
           mapStyle={mapStyle}
-          mapboxAccessToken={mapboxAccessToken}
+          mapboxAccessToken={MapboxAccessToken}
         />
       </DeckGL>
   );
