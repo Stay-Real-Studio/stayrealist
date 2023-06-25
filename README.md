@@ -1,6 +1,13 @@
 # Stayrealist using Turborepo react-native starter
 
-This is the mono repo for stayrealist project.
+This is the monorepo for Stayrealist project.
+
+## How to start?
+
+```sh
+yarn install
+yarn dev
+```
 
 ## What's inside?
 
@@ -17,16 +24,10 @@ Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
 ### Utilities
 
-This Turborepo has some additional tools already setup for you:
+This repo has these tools already setup:
 
 - [Expo](https://docs.expo.dev/) for native development
 - [TypeScript](https://www.typescriptlang.org/) for static type checking
 - [Prettier](https://prettier.io) for code formatting
 
 
-## How to start?
-
-```sh
-yarn install
-yarn dev
-```
