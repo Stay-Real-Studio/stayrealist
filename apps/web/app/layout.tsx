@@ -1,10 +1,6 @@
 // These styles apply to every route in the application
-import '../styles/global.css'
+import '../styles/global.css';
 
-export default function Layout({ children }) {
-  return (
-    <>
-      {children}
-    </>
-  )
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
 }
