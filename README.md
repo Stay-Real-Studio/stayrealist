@@ -1,18 +1,10 @@
-# Turborepo react-native starter
+# Stayrealist using Turborepo react-native starter
 
-This is an official starter Turborepo.
-
-## Using this example
-
-Run the following command:
-
-```sh
-npx create-turbo@latest -e with-react-native-web
-```
+This is the mono repo for stayrealist project.
 
 ## What's inside?
 
-This Turborepo includes the following packages/apps:
+This repo includes the following packages/apps:
 
 ### Apps and Packages
 
@@ -30,3 +22,17 @@ This Turborepo has some additional tools already setup for you:
 - [Expo](https://docs.expo.dev/) for native development
 - [TypeScript](https://www.typescriptlang.org/) for static type checking
 - [Prettier](https://prettier.io) for code formatting
+
+
+## How to start?
+1. For Mapbox to render properly, `/app/web/.env.local` is needed, like
+
+    ```
+    NEXT_PUBLIC_MAPBOX_DEFAULT_PUBLIC_ACCESS_TOKEN=pk.eyJ.. 
+    ```
+
+1. Run command to start: 
+    ```sh
+    yarn install
+    yarn dev
+    ```
