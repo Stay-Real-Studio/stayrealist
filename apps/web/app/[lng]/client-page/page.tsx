@@ -1,17 +1,17 @@
-'use client';
+'use client'
 
-import Link from 'next/link';
-import { useTranslation } from '../../i18n/client';
-import { Footer } from '../components/Footer/client';
-import { LanguageType } from '../../../types/i18n.types';
-import SrMap from '../../../components/map';
+import Link from 'next/link'
+import { useTranslation } from '../../i18n/client'
+import { Footer } from '../components/Footer/client'
+import { LanguageType } from '../../../types/i18n.types'
+import SrMap from '../../../components/map'
 
 export default function Page({
   params: { lng },
 }: {
-  params: { lng: LanguageType };
+  params: { lng: LanguageType }
 }) {
-  const { t } = useTranslation(lng, 'client-page');
+  const { t } = useTranslation(lng, 'client-page')
   return (
     <>
       <div className="z-10">
@@ -26,5 +26,5 @@ export default function Page({
 
       <Footer lng={lng} />
     </>
-  );
+  )
 }
