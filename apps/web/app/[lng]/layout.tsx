@@ -1,8 +1,8 @@
 import { dir } from 'i18next'
 import Providers from '../../components/providers'
 import { LanguageType } from '../../types/i18n.types'
-import { CnLogo } from './components/CnLogo'
-import { EnLogo } from './components/EnLogo'
+import { CnLogo } from '../../components/logos/CnLogo'
+import { EnLogo } from '../../components/logos/EnLogo'
 
 const languages = ['en', 'zh-CN']
 

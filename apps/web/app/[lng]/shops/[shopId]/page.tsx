@@ -16,7 +16,7 @@ export default async function Page({ params: { lng, shopId } }) {
       {coins.result.map((coin) => {
         return <div key={coin._rev}>{coin.name}</div>
       })}
-      <Link href={`/${lng}/second-page`}>{t('to-second-page')}</Link>
+      <Link href={`/${lng}/shop-list`}>{t('to-shop-list')}</Link>
       <br />
       <Link href={`/${lng}/client-page`}>{t('to-map-page')}</Link>
       <Footer lng={lng} />
