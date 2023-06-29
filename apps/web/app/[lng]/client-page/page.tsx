@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useTranslation } from '../../i18n/client'
-import { Footer } from '../components/Footer/client'
+import { Footer } from '../../../components/Footer/client'
 import { LanguageType } from '../../../types/i18n.types'
 import SrMap from '../../../components/map'
 
