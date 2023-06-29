@@ -1,8 +1,8 @@
-import Link from 'next/link'
 import { useTranslation } from '../../../i18n'
 import { Footer } from '../../../../components/Footer'
 import { getShops } from '../../../../composables/shop.functions'
 import { Shop } from 'ui'
+import { ShopDetailsContainer } from '../../../../components/ShopDetailsContainer'
 
 export default async function Page({ params: { lng, shopId } }) {
   const { t } = await useTranslation(lng)
@@ -11,7 +11,8 @@ export default async function Page({ params: { lng, shopId } }) {
   return (
     <>
       {shops.result.map((shop: Shop) => {
-        return <div key={shop._id}>{shop.name}</div>
+        console.log(shop)
+        return <ShopDetailsContainer key={shop._id} shop={shop} />
       })}
       <Footer lng={lng} />
     </>

@@ -9,14 +9,18 @@ import { Shop } from '../types/shop.types'
 
 export interface ShopDetailsProps {
   shop: Shop
-  onClick?: (event: GestureResponderEvent) => void
+  onShareClick?: (event: GestureResponderEvent) => void
 }
 
-export function ShopDetails({ shop, onClick }: ShopDetailsProps) {
+export function ShopDetails({ shop, onShareClick }: ShopDetailsProps) {
   return (
-    <TouchableOpacity style={styles.button} onPress={onClick}>
+    <>
       <Text style={styles.text}>{shop.name}</Text>
-    </TouchableOpacity>
+
+      <TouchableOpacity style={styles.button} onPress={onShareClick}>
+        <Text style={styles.text}>Share {shop.name}</Text>
+      </TouchableOpacity>
+    </>
   )
 }
 
