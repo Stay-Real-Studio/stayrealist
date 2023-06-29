@@ -1,24 +1,18 @@
 import Link from 'next/link'
 import { useTranslation } from '../../../i18n'
-import { getCoins } from '../../../../composables/coin.functions'
 import { Footer } from '../../../../components/Footer'
+import { getShops } from '../../../../composables/shop.functions'
+import { Shop } from 'ui'
 
 export default async function Page({ params: { lng, shopId } }) {
   const { t } = await useTranslation(lng)
-  const coins = await getCoins()
-
-  console.log(shopId)
+  const shops = await getShops()
 
   return (
     <>
-      {shopId}
-      <h1>{t('title')}</h1>
-      {coins.result.map((coin) => {
-        return <div key={coin._rev}>{coin.name}</div>
+      {shops.result.map((shop: Shop) => {
+        return <div key={shop._id}>{shop.name}</div>
       })}
-      <Link href={`/${lng}/shop-list`}>{t('to-shop-list')}</Link>
-      <br />
-      <Link href={`/${lng}/client-page`}>{t('to-map-page')}</Link>
       <Footer lng={lng} />
     </>
   )

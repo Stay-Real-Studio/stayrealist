@@ -14,7 +14,11 @@ export default function RootLayout({ children, params: { lng } }) {
   return (
     <html lang={lng} dir={dir(lng)}>
       <body>
-        {lng === LanguageType.English ? <EnLogo /> : <CnLogo />}
+        {lng === LanguageType.English ? (
+          <EnLogo lng={lng} />
+        ) : (
+          <CnLogo lng={lng} />
+        )}
         <Providers>{children}</Providers>
       </body>
     </html>

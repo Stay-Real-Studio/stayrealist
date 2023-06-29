@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { useTranslation } from '../i18n'
-import { getCoins } from '../../composables/coin.functions'
 import { Footer } from '../../components/Footer'
 import { getShops } from '../../composables/shop.functions'
 

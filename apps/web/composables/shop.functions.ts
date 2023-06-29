@@ -1,6 +1,9 @@
+import { Shop } from 'ui'
 import { SHOPS_URL } from '../constants/coin.contants'
 
-export async function getShops() {
+export async function getShops(): Promise<{
+  result: Shop[]
+}> {
   const res = await fetch(SHOPS_URL)
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
