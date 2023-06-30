@@ -1,100 +1,151 @@
-import React, { useState, useMemo } from 'react';
-import { Map } from 'react-map-gl';
-import DeckGL from '@deck.gl/react';
-import { GeoJsonLayer, ArcLayer, ScatterplotLayer } from '@deck.gl/layers';
-import { calculateArcs, getTooltip } from '../composables/map.functions';
-import {
-  INITIAL_VIEW_STATE,
-  MAP_STYLE,
-  inFlowColors,
-  MapboxAccessToken,
-  outFlowColors,
-} from '../constants/map.constants';
-import { useData, useCoins } from '../composables/map.hooks';
+import React, { useState, useMemo } from 'react'
+// import Image from 'next/image'
+import { Map } from 'react-map-gl'
+import maplibregl from 'maplibre-gl'
+import DeckGL from '@deck.gl/react'
+import { MapView } from '@deck.gl/core'
+import { IconLayer } from '@deck.gl/layers'
+
+import iconMappingJSON from '../constants/location-icon-mapping.json'
+import iconAtlasPNG from '../assets/images/location-icon-atlas.png'
+
+import IconClusterLayer from '../composables/icon-cluster-layer.js'
+
+// // Source data CSV
+// const DATA_URL =
+//   'https://raw.githubusercontent.com/visgl/deck.gl-data/master/examples/icon/meteorites.json' // eslint-disable-line
+
+const MAP_VIEW = new MapView({ repeat: true })
+const INITIAL_VIEW_STATE = {
+  longitude: -35,
+  latitude: 36.7,
+  zoom: 1.8,
+  maxZoom: 20,
+  pitch: 0,
+  bearing: 0,
+}
+
+const MAP_STYLE =
+  'https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json'
+
+import { useData, useCoins } from '../composables/map.hooks'
+
+function renderTooltip(info) {
+  const { object, x, y } = info
+
+  if (info.objects) {
+    return (
+      <div className="tooltip interactive" style={{ left: x, top: y }}>
+        {info.objects.map(({ name, year, mass, class: meteorClass }) => {
+          return (
+            <div key={name}>
+              <h5>{name}</h5>
+              <div>Year: {year || 'unknown'}</div>
+              <div>Class: {meteorClass}</div>
+              <div>Mass: {mass}g</div>
+            </div>
+          )
+        })}
+      </div>
+    )
+  }
+
+  if (!object) {
+    return null
+  }
+
+  return object.cluster ? (
+    <div className="tooltip" style={{ left: x, top: y }}>
+      {object.point_count} records
+    </div>
+  ) : (
+    <div className="tooltip" style={{ left: x, top: y }}>
+      {object.name} {object.year ? `(${object.year})` : ''}
+    </div>
+  )
+}
 
 export default function SrMap({
-  strokeWidth = 1,
+  // data = DATA_URL,
+  iconMapping = iconMappingJSON,
+  iconAtlas = iconAtlasPNG,
+  showCluster = false,
   mapStyle = MAP_STYLE,
 }: {
-  strokeWidth?: number;
-  mapStyle?: string;
+  // data?: any
+  iconMapping?: any
+  iconAtlas?: any
+  showCluster?: boolean
+  mapStyle?: string
 }) {
-  const [selectedCounty, selectCounty] = useState(null);
-  const { isLoading, data } = useData();
-  const { isLoading: isLoadingCoins, data: coins } = useCoins();
+  // console.log(iconMapping, 'iconMapping')
+  // console.log(iconAtlas, 'iconAtlas')
+  const [hoverInfo, setHoverInfo] = useState<any>({})
+  const { isLoading, data } = useData()
 
-  const arcs = useMemo(() => {
-    if (!data) return [];
+  const retData = useMemo(() => {
+    if (!data) return []
+    console.log(data, 'retData')
+    return data
+  }, [data])
 
-    return calculateArcs(data.features, selectedCounty);
-  }, [data, selectedCounty]);
+  const hideTooltip = () => {
+    setHoverInfo({})
+  }
+  const expandTooltip = (info) => {
+    if (info.picked && showCluster) {
+      setHoverInfo(info)
+    } else {
+      setHoverInfo({})
+    }
+  }
 
-  if (isLoading) return;
-  if (!isLoadingCoins) console.log(coins);
+  const layerProps: any = {
+    data: retData,
+    pickable: true,
+    getPosition: (d) => d.coordinates,
+    iconAtlas,
+    iconMapping,
+    onHover: !hoverInfo.objects && setHoverInfo,
+  }
 
-  const layers = [
-    new GeoJsonLayer({
-      id: 'geojson',
-      data,
-      stroked: false,
-      filled: true,
-      getFillColor: [0, 0, 0, 0],
-      onClick: ({ object }) => selectCounty(object),
-      pickable: true,
-    }),
-    new ScatterplotLayer({
-      id: 'deckgl-circle',
-      data: [
-        {
-          position: [-122.402, 37.79],
-          color: [255, 0, 0],
-          radius: 1000,
-        },
-      ],
-      getPosition: (d) => d.position,
-      getFillColor: (d) => d.color,
-      getRadius: (d) => d.radius,
-      opacity: 0.7,
-    }),
-    new ArcLayer({
-      id: 'arc',
-      data: arcs,
-      getSourcePosition: (d) => d.source,
-      getTargetPosition: (d) => d.target,
-      getSourceColor: (d) =>
-        (d.gain > 0 ? inFlowColors : outFlowColors)[d.quantile],
-      getTargetColor: (d) =>
-        (d.gain > 0 ? outFlowColors : inFlowColors)[d.quantile],
-      getWidth: strokeWidth,
-    }),
-    new ArcLayer({
-      id: 'deckgl-arc',
-      data: [
-        {
-          source: [-122.3998664, 37.7883697],
-          target: [-122.400068, 37.7900503],
-        },
-      ],
-      getSourcePosition: (d) => d.source,
-      getTargetPosition: (d) => d.target,
-      getSourceColor: [255, 208, 0],
-      getTargetColor: [0, 128, 255],
-      getWidth: 8,
-    }),
-  ];
+  const layer = useMemo(() => {
+    console.log('1')
+    return showCluster
+      ? new IconClusterLayer({
+          ...layerProps,
+          id: 'icon-cluster',
+          sizeScale: 40,
+        })
+      : new IconLayer({
+          ...layerProps,
+          id: 'icon',
+          getIcon: (d) => 'marker',
+          sizeUnits: 'meters',
+          sizeScale: 2000,
+          sizeMinPixels: 6,
+        })
+  }, [data])
 
   return (
+    <>
       <DeckGL
-        layers={layers}
+        layers={[layer]}
+        views={MAP_VIEW}
         initialViewState={INITIAL_VIEW_STATE}
-        controller={true}
-        getTooltip={getTooltip}
+        controller={{ dragRotate: false }}
+        onViewStateChange={hideTooltip}
+        onClick={expandTooltip}
       >
         <Map
           reuseMaps
+          mapLib={maplibregl}
           mapStyle={mapStyle}
-          mapboxAccessToken={MapboxAccessToken}
+          // preventStyleDiffing={true}
         />
+
+        {renderTooltip(hoverInfo)}
       </DeckGL>
-  );
+    </>
+  )
 }

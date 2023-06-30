@@ -5,6 +5,7 @@ import { useTranslation } from '../../i18n/client'
 import { Footer } from '../../../components/Footer/client'
 import { LanguageType } from '../../../types/i18n.types'
 import SrMap from '../../../components/map'
+import { Merchant } from '../components/Merchant'
 
 export default function Page({
   params: { lng },
@@ -25,6 +26,9 @@ export default function Page({
       <SrMap />
 
       <Footer lng={lng} />
+      {/* <div className="z-10 bg-lime-50 p-4 top-6 right-6">
+        <Merchant lng={lng} />
+      </div> */}
     </>
   )
 }

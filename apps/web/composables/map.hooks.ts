@@ -1,17 +1,22 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query'
 
+const DATA_URL2 =
+  'https://raw.githubusercontent.com/visgl/deck.gl-data/master/examples/arc/counties.json' // eslint-disable-line
+const COINS_URL = `https://kfoyr571.api.sanity.io/v2021-06-07/data/query/production?query=*[_type=='coin']`
+
+// Source data CSV
 const DATA_URL =
-  'https://raw.githubusercontent.com/visgl/deck.gl-data/master/examples/arc/counties.json'; // eslint-disable-line
-const COINS_URL = `https://kfoyr571.api.sanity.io/v2021-06-07/data/query/production?query=*[_type=='coin']`;
+  'https://raw.githubusercontent.com/visgl/deck.gl-data/master/examples/icon/meteorites.json' // eslint-disable-line
 
-const fetchData = () => fetch(DATA_URL).then((response) => response.json());
-export const fetchCoins = () => fetch(COINS_URL).then((response) => response.json());
+const fetchData = () => fetch(DATA_URL).then((response) => response.json())
+export const fetchCoins = () =>
+  fetch(COINS_URL).then((response) => response.json())
 
 export const useData = () => {
   return useQuery(['data'], fetchData, {
     refetchOnWindowFocus: false,
-  });
-};
+  })
+}
 
 export const useCoins = () => {
   return useQuery(['coins'], fetchCoins, {
@@ -19,5 +24,5 @@ export const useCoins = () => {
     select(data) {
       return data.result
     },
-  });
-};
+  })
+}

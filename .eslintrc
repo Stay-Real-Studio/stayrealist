@@ -1,3 +1,8 @@
 {
-  "extends": ["eslint:recommended", "next", "@sanity/eslint-config-studio"]
+  "extends": [
+    "next/babel",
+    "eslint:recommended",
+    "next",
+    "@sanity/eslint-config-studio"
+  ]
 }
