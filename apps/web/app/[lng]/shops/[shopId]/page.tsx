@@ -4,6 +4,7 @@ import { getShops } from '../../../../composables/shop.functions'
 import { Shop } from 'ui'
 import { ShopDetailsContainer } from '../../../../components/shop/shop-details-container.client'
 import { Metadata, ResolvingMetadata } from 'next'
+import { ShopDetails } from 'ui'
 
 type Props = { params: { lng: any; shopId: any }; searchParams: any }
 export async function generateMetadata(
@@ -34,7 +35,7 @@ export default async function Page({ params: { lng } }: Props) {
   return (
     <>
       {shops.result.map((shop: Shop) => {
-        return <ShopDetailsContainer key={shop._id} shop={shop} />
+        return <ShopDetails key={shop._id} shop={shop} />
       })}
       <Footer lng={lng} />
     </>
