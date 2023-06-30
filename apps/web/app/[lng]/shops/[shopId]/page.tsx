@@ -30,7 +30,8 @@ export async function generateMetadata(
 
 export default async function Page({ params: { lng, shopId } }: Props) {
   const { t } = await useTranslation(lng)
-  const shop: Shop = await getShop(shopId)
+  const shopResp = await getShop(shopId)
+  const shop: Shop = shopResp.result[0]
 
   return (
     <>

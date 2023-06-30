@@ -13,9 +13,7 @@ export async function getShops(): Promise<{
   return res.json()
 }
 
-export async function getShop(shopId: string): Promise<{
-  shop: Shop
-}> {
+export async function getShop(shopId: string) {
   const url = SHOP_URL(shopId)
   console.log(url)
   const res = await fetch(url, { next: { revalidate: 60 } })
