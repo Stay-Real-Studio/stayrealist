@@ -4,7 +4,7 @@ import { SHOPS_URL } from '../constants/coin.contants'
 export async function getShops(): Promise<{
   result: Shop[]
 }> {
-  const res = await fetch(SHOPS_URL)
+  const res = await fetch(SHOPS_URL, { next: { revalidate: 60 } })
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 
