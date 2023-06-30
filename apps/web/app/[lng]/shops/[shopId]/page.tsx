@@ -35,7 +35,7 @@ export default async function Page({ params: { lng, shopId } }: Props) {
 
   return (
     <>
-      return <ShopDetailsContainer key={shop._id} shop={shop} lng={lng} />
+      <ShopDetailsContainer key={shop._id} shop={shop} lng={lng} />
       <Footer lng={lng} />
     </>
   )

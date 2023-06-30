@@ -11,7 +11,7 @@ export default function Page({
 }: {
   params: { lng: LanguageType }
 }) {
-  const { t } = useTranslation(lng, 'client-page')
+  const { t } = useTranslation(lng, 'map')
   return (
     <>
       <div className="z-10">

@@ -3,7 +3,7 @@ import { useTranslation } from '../../i18n'
 import { getShops } from '../../../composables/shop.functions'
 
 export default async function Page({ params: { lng } }) {
-  const { t } = await useTranslation(lng, 'shops')
+  const { t } = await useTranslation(lng, 'shop')
   const shops = await getShops()
 
   return (
