@@ -1,19 +1,16 @@
 import { useTranslation } from '../../../i18n'
 import { Footer } from '../../../../components/Footer'
-import { getShops } from '../../../../composables/shop.functions'
+import { getShops, getShop } from '../../../../composables/shop.functions'
 import { Shop } from 'ui'
 import { Metadata, ResolvingMetadata } from 'next'
-import { ShopDetails } from 'ui'
-import { WhatsappIcon, WhatsappShareButton } from 'next-share'
 import { ShopDetailsContainer } from '../../../../components/shop/shop-details-container.client'
 
 type Props = { params: { lng: any; shopId: any }; searchParams: any }
 export async function generateMetadata(
-  { params: { lng } }: Props,
+  { params: { lng, shopId } }: Props,
   parent?: ResolvingMetadata
 ): Promise<Metadata> {
-  const shops = await getShops()
-  const shop: Shop = shops.result[0]
+  const shop: Shop = await getShop(shopId)
 
   return {
     title: `${shop.displayName}`,
@@ -31,16 +28,14 @@ export async function generateMetadata(
   }
 }
 
-export default async function Page({ params: { lng } }: Props) {
+export default async function Page({ params: { lng, shopId } }: Props) {
   const { t } = await useTranslation(lng)
-  const shops = await getShops()
-  const shop: Shop = shops.result[0]
+  const shopResp = await getShop(shopId)
+  const shop: Shop = shopResp.result[0]
 
   return (
     <>
-      {shops.result.map((shop: Shop) => {
-        return <ShopDetailsContainer key={shop._id} shop={shop} lng={lng} />
-      })}
+      <ShopDetailsContainer key={shop._id} shop={shop} lng={lng} />
       <Footer lng={lng} />
     </>
   )
