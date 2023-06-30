@@ -7,8 +7,10 @@ export const ShopDetailsContainer = ({ shop }: { shop: Shop }) => {
   return (
     <>
       <WhatsappShareButton
-        url={'http://localhost:3000/en/shops/3e30d82a-2111-4e51-bc2e-192569caafb6'}
-        title={'next-share is a social share buttons for your next React apps.'}
+        url={
+          'https://www.stayrealist.com/zh-CN/shops/3e30d82a-2111-4e51-bc2e-192569caafb6'
+        }
+        title={`${shop.name} is good`}
         separator=":: "
       >
         <WhatsappIcon size={32} round />
