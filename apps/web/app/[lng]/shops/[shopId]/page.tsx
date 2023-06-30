@@ -2,7 +2,6 @@ import { useTranslation } from '../../../i18n'
 import { Footer } from '../../../../components/Footer'
 import { getShops } from '../../../../composables/shop.functions'
 import { Shop } from 'ui'
-import { ShopDetailsContainer } from '../../../../components/shop/shop-details-container.client'
 import { Metadata, ResolvingMetadata } from 'next'
 import { ShopDetails } from 'ui'
 
@@ -14,11 +13,10 @@ export async function generateMetadata(
   const shops = await getShops()
   const shop: Shop = shops.result[0]
 
-  // optionally access and extend (rather than replace) parent metadata
   const previousImages = (await parent).openGraph?.images || []
 
   return {
-    title: shop.name,
+    title: `${shop.displayName}`,
     openGraph: {
       images: [
         'https://gfashion.com/cdn/shop/files/logo_220x@2x.png?v=1670594613',

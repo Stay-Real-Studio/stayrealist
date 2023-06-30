@@ -10,6 +10,11 @@ export default {
       title: 'Name',
     },
     {
+      name: 'displayName',
+      type: 'string',
+      title: 'Display Name',
+    },
+    {
       title: 'Shop Location',
       name: 'location',
       type: 'geopoint'
