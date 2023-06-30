@@ -2,7 +2,7 @@ import { useTranslation } from '../../../i18n'
 import { Footer } from '../../../../components/Footer'
 import { getShops } from '../../../../composables/shop.functions'
 import { Shop } from 'ui'
-import { ShopDetailsContainer } from '../../../../components/shop/shop-details.client'
+import { ShopDetailsContainer } from '../../../../components/shop/shop-details-container.client'
 import { Metadata, ResolvingMetadata } from 'next'
 
 type Props = { params: { lng: any; shopId: any }; searchParams: any }
