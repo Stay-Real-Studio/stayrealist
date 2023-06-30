@@ -1,6 +1,13 @@
 // These styles apply to every route in the application
-import '../styles/global.css';
+import { Analytics } from '@vercel/analytics/react'
+
+import '../styles/global.css'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      <Analytics />
+    </>
+  )
 }

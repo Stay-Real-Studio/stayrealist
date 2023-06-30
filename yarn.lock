@@ -4048,6 +4048,11 @@
     "@urql/core" ">=2.3.1"
     wonka "^4.0.14"
 
+"@vercel/analytics@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@vercel/analytics/-/analytics-1.0.1.tgz#38308a626c91866cb00a249c08bf65251e9b9d81"
+  integrity sha512-Ux0c9qUfkcPqng3vrR0GTrlQdqNJ2JREn/2ydrVuKwM3RtMfF2mWX31Ijqo1opSjNAq6rK76PwtANw6kl6TAow==
+
 "@vercel/error-utils@1.0.10":
   version "1.0.10"
   resolved "https://registry.yarnpkg.com/@vercel/error-utils/-/error-utils-1.0.10.tgz#6530e9c930d5cf4c7f96045ec3a0bccaf2e6b14c"
