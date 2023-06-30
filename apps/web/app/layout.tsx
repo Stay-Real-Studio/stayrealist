@@ -8,6 +8,7 @@ export const metadata = {
     template: '%s - Stayrealist',
     default: 'Stayrealist', // a default is required when creating a template
   },
+  description: 'Stayrealist',
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {

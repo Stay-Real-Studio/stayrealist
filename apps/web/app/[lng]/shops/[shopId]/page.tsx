@@ -4,6 +4,8 @@ import { getShops } from '../../../../composables/shop.functions'
 import { Shop } from 'ui'
 import { Metadata, ResolvingMetadata } from 'next'
 import { ShopDetails } from 'ui'
+import { WhatsappIcon, WhatsappShareButton } from 'next-share'
+import { ShopDetailsContainer } from '../../../../components/shop/shop-details-container.client'
 
 type Props = { params: { lng: any; shopId: any }; searchParams: any }
 export async function generateMetadata(
@@ -13,15 +15,18 @@ export async function generateMetadata(
   const shops = await getShops()
   const shop: Shop = shops.result[0]
 
-  const previousImages = (await parent).openGraph?.images || []
-
   return {
     title: `${shop.displayName}`,
+    description: `${shop.displayName}'s description.`,
     openGraph: {
       images: [
-        'https://gfashion.com/cdn/shop/files/logo_220x@2x.png?v=1670594613',
-        ...previousImages,
+        {
+          url: 'https://nextjs.org/og.png',
+          width: 800,
+          height: 600,
+        },
       ],
+      locale: lng,
     },
   }
 }
@@ -29,11 +34,12 @@ export async function generateMetadata(
 export default async function Page({ params: { lng } }: Props) {
   const { t } = await useTranslation(lng)
   const shops = await getShops()
+  const shop: Shop = shops.result[0]
 
   return (
     <>
       {shops.result.map((shop: Shop) => {
-        return <ShopDetails key={shop._id} shop={shop} />
+        return <ShopDetailsContainer key={shop._id} shop={shop} lng={lng} />
       })}
       <Footer lng={lng} />
     </>
