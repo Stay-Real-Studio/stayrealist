@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { Map } from 'react-map-gl'
+import { Map, Popup } from 'react-map-gl'
 import DeckGL from '@deck.gl/react'
 import { IconLayer } from '@deck.gl/layers'
 import {
@@ -10,6 +10,8 @@ import {
   MapboxAccessToken,
 } from '../constants/map.constants'
 import { useShops } from '../composables/map.hooks'
+import { useState } from 'react'
+import { Shop } from 'ui'
 
 export default function SrMap({
   strokeWidth = 1,
@@ -18,6 +20,8 @@ export default function SrMap({
   strokeWidth?: number
   mapStyle?: string
 }) {
+  const [isPopupShow, setIsPopupShow] = useState<boolean>(false)
+  const [currShop, setCurrShop] = useState<Shop | undefined>(undefined)
   const { isLoading: isLoadingShops, data }: { isLoading: boolean; data } =
     useShops()
 
@@ -27,6 +31,7 @@ export default function SrMap({
     id: 'IconLayer',
     // data: 'https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/bart-stations.json',
     data: data.map((shop) => {
+      if (!shop.location) return shop
       return {
         ...shop,
         coordinates: [shop.location.lng, shop.location.lat],
@@ -76,6 +81,7 @@ export default function SrMap({
   })
 
   const layers = [iconLayer]
+  console.log(currShop)
 
   return (
     <>
@@ -89,14 +95,38 @@ export default function SrMap({
         initialViewState={INITIAL_VIEW_STATE}
         controller={true}
         getTooltip={(object) => {
-          console.log(object)
+          if (!data) return
+          if (!object.object) {
+            setCurrShop(undefined)
+            return
+          }
+
+          if (!object.object._id) return
+          data.map((shop: Shop) => {
+            if (shop._id == object.object._id) {
+              setCurrShop(shop)
+            }
+          })
         }}
       >
         <Map
           reuseMaps
           mapStyle={mapStyle}
           mapboxAccessToken={MapboxAccessToken}
-        />
+        >
+          {currShop && (
+            <Popup
+              longitude={currShop.location.lng}
+              latitude={currShop.location.lat}
+              anchor="bottom"
+              onClose={() => {
+                console.log('here')
+              }}
+            >
+              You are here
+            </Popup>
+          )}
+        </Map>
       </DeckGL>
     </>
   )
