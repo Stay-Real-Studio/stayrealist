@@ -20,6 +20,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang={lng} dir={dir(lng)}>
+      <head>
+        <link
+          href="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css"
+          rel="stylesheet"
+        />
+      </head>
       <body>
         {lng === LanguageType.English ? (
           <EnLogo lng={lng} />
