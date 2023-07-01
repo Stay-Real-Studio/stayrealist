@@ -1,15 +1,9 @@
 'use client'
 
-import { Shop, ShopDetails } from 'ui'
+import { Shop } from 'ui'
 
 import { WhatsappShareButton, WhatsappIcon } from 'next-share'
-export const ShopDetailsContainer = ({
-  lng,
-  shop,
-}: {
-  lng: any
-  shop: Shop
-}) => {
+export const ShareButtons = ({ lng, shop }: { lng: any; shop: Shop }) => {
   return (
     <>
       <WhatsappShareButton
@@ -19,7 +13,6 @@ export const ShopDetailsContainer = ({
       >
         <WhatsappIcon size={32} round />
       </WhatsappShareButton>
-      <ShopDetails key={shop._id} shop={shop} />
     </>
   )
 }
