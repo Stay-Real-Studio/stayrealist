@@ -20,7 +20,7 @@ export async function generateMetadata(
     openGraph: {
       images: [
         {
-          url: builder.image(shop.logoUrl).width(256).height(256).url(),
+          url: builder.image(shop.logo).width(256).height(256).url(),
           width: 256,
           height: 256,
         },

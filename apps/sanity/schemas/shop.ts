@@ -25,11 +25,6 @@ export default {
       type: 'image',
     },
     {
-      title: 'Shop Logo',
-      name: 'logo',
-      type: 'image',
-    },
-    {
       title: 'Shop Background Image',
       name: 'backgroundImage',
       type: 'image',

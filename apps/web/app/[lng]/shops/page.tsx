@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { useTranslation } from '../../i18n'
-import { getShops, getSanityImgURL } from '../../../composables/shop.functions'
+import { getShops } from '../../../composables/shop.functions'
 import { builder } from '../../../composables/sanity.functions'
 // import Image from 'next/image'
 
@@ -23,8 +23,7 @@ export default async function Page({ params: { lng } }) {
               <Link href={`/${lng}/shops/${shop._id}`}>
                 <span>Go to {shop.name}</span>
                 <img
-                  // src={getSanityImgURL(shop.logoUrl.asset._ref)}
-                  src={builder.image(shop.logoUrl).width(256).height(256).url()}
+                  src={builder.image(shop.logo).width(256).height(256).url()}
                   width={100}
                   height={100}
                   alt="map icon"
