@@ -3,17 +3,16 @@ import { Footer } from '../../../../components/Footer'
 import { getShop } from '../../../../composables/shop.functions'
 import { Shop } from 'ui'
 import { Metadata, ResolvingMetadata } from 'next'
-import { WhatsappShareButton, WhatsappIcon } from 'next-share'
 import { ShopDetails } from 'ui'
 import { ShareButtons } from '../../../../components/share-buttons.client'
+import { builder } from '../../../../composables/sanity.functions'
 
 type Props = { params: { lng: any; shopId: any }; searchParams: any }
 export async function generateMetadata(
   { params: { lng, shopId } }: Props,
   parent?: ResolvingMetadata
 ): Promise<Metadata> {
-  const shopResp = await getShop(shopId)
-  const shop: Shop = shopResp.result[0]
+  const shop: Shop = await getShop(shopId)
 
   return {
     title: `${shop.displayName}`,
@@ -21,7 +20,7 @@ export async function generateMetadata(
     openGraph: {
       images: [
         {
-          url: `https://cdn.sanity.io/images/kfoyr571/production/${shop.logo.asset._ref}`,
+          url: builder.image(shop.logo).width(256).height(256).url(),
           width: 256,
           height: 256,
         },
@@ -33,11 +32,11 @@ export async function generateMetadata(
 
 export default async function Page({ params: { lng, shopId } }: Props) {
   const { t } = await useTranslation(lng)
-  const shopResp = await getShop(shopId)
-  const shop: Shop = shopResp.result[0]
+  const shop = await getShop(shopId)
 
   return (
     <>
+      <h1>{t('title')}</h1>
       <ShopDetails key={shop._id} shop={shop} lng={lng} />
       <ShareButtons shop={shop} lng={lng} />
       <Footer lng={lng} />

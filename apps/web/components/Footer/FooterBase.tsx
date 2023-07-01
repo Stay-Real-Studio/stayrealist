@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { Trans } from 'react-i18next/TransWithoutContext'
 import { languages } from '../../app/i18n/settings'
 
-export const FooterBase = ({ t, lng }) => {
+export const FooterBase = ({ t, lng }: { t: any, lng: any }) => {
   return (
     <footer style={{ marginTop: 50 }} className="z-10">
       <Trans i18nKey="languageSwitcher" t={t}>

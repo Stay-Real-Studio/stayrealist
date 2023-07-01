@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@mapbox/tiny-sdf": "^2.0.6",
+    "@sanity/client": "^6.1.5",
+    "@sanity/image-url": "^1.0.2",
     "@tanstack/react-query": "^4.29.14",
     "@vercel/analytics": "^1.0.1",
     "accept-language": "^3.0.18",
