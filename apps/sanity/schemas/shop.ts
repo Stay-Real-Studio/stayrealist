@@ -20,8 +20,8 @@ export default {
       type: 'geopoint',
     },
     {
-      name: 'logoUrl',
-      title: 'Shop Logo URL',
+      name: 'logo',
+      title: 'Shop Logo Image',
       type: 'image',
     },
     {
