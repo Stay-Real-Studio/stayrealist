@@ -1,5 +1,5 @@
 import { Shop } from 'ui'
-import { SHOPS_URL, SHOP_URL } from '../constants/coin.contants'
+
 import { client } from './sanity.functions'
 
 export async function getShops(): Promise<Shop[]> {

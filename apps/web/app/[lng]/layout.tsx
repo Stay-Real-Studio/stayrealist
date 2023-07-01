@@ -1,9 +1,7 @@
 import { dir } from 'i18next'
 import Providers from '../../components/providers'
-import { LanguageType } from '../../types/i18n.types'
-import { CnLogo } from '../../components/logos/CnLogo'
-import { EnLogo } from '../../components/logos/EnLogo'
 import { ReactNode } from 'react'
+import { Footer } from '../../components/Footer'
 
 const languages = ['en', 'zh-CN']
 
@@ -21,12 +19,8 @@ export default function RootLayout({
   return (
     <html lang={lng} dir={dir(lng)}>
       <body>
-        {lng === LanguageType.English ? (
-          <EnLogo lng={lng} />
-        ) : (
-          <CnLogo lng={lng} />
-        )}
         <Providers>{children}</Providers>
+        <Footer lng={lng} />
       </body>
     </html>
   )
