@@ -17,7 +17,12 @@ export default {
     {
       title: 'Shop Location',
       name: 'location',
-      type: 'geopoint'
-    }
+      type: 'geopoint',
+    },
+    {
+      name: 'logoUrl',
+      title: 'Shop Logo URL',
+      type: 'image',
+    },
   ],
 }
