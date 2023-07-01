@@ -9,7 +9,7 @@ export default async function Page({ params: { lng } }) {
   return (
     <div className="flex flex-col">
       <h1>{t('title')}</h1>
-      {shops.result.map((shop) => {
+      {shops.map((shop) => {
         return (
           <div key={shop._id}>
             <Link href={`/${lng}/shops/${shop._id}`}>Go to {shop.name}</Link>
