@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-export const CnLogo = ({ lng }) => {
+export const CnLogo = ({ lng }: { lng: any }) => {
   return (
     <Link
       href={`/${lng}/`}

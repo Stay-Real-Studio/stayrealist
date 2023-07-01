@@ -20,7 +20,7 @@ export async function generateMetadata(
     openGraph: {
       images: [
         {
-          url: builder.image(shop.logo).width(250).height(250).url(),
+          url: builder.image(shop.logo).width(256).height(256).url(),
           width: 256,
           height: 256,
         },
@@ -36,6 +36,7 @@ export default async function Page({ params: { lng, shopId } }: Props) {
 
   return (
     <>
+      <h1>{t('title')}</h1>
       <ShopDetails key={shop._id} shop={shop} lng={lng} />
       <ShareButtons shop={shop} lng={lng} />
       <Footer lng={lng} />
