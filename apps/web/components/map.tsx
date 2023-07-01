@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState, useMemo } from 'react'
 import { Map } from 'react-map-gl'
 import DeckGL from '@deck.gl/react'

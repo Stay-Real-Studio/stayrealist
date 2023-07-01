@@ -3,7 +3,6 @@ import { Footer } from '../../../../components/Footer'
 import { getShop } from '../../../../composables/shop.functions'
 import { Shop } from 'ui'
 import { Metadata, ResolvingMetadata } from 'next'
-import { ShopDetails } from 'ui'
 import { ShareButtons } from '../../../../components/share-buttons.client'
 import { builder } from '../../../../composables/sanity.functions'
 
@@ -35,11 +34,15 @@ export default async function Page({ params: { lng, shopId } }: Props) {
   const shop = await getShop(shopId)
 
   return (
-    <>
-      <h1>{t('title')}</h1>
-      <ShopDetails key={shop._id} shop={shop} lng={lng} />
-      <ShareButtons shop={shop} lng={lng} />
+    <div className="flex flex-col">
+      <h1>{shop.displayName}详情:</h1>
+      <div className="m-4">Phone number: To be confirmed</div>
+      <div className="m-4">Shop email: To be confirmed</div>
+      <div className="m-4">
+        Share {shop.displayName}: <ShareButtons shop={shop} lng={lng} />
+      </div>
+
       <Footer lng={lng} />
-    </>
+    </div>
   )
 }
