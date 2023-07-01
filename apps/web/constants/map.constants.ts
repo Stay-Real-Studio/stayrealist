@@ -4,9 +4,9 @@ export const MAP_STYLE =
   'https://basemaps.cartocdn.com/gl/positron-nolabels-gl-style/style.json';
 
 export const INITIAL_VIEW_STATE = {
-  longitude: -122.402,
-  latitude: 37.79,
-  zoom: 7,
+  longitude: -103.04119563650744,
+  latitude: 45.84545027465657,
+  zoom: 3,
   maxZoom: 15,
   pitch: 30,
   bearing: 30,

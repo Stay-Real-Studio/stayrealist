@@ -1,5 +1,5 @@
 export type SanityGeopoint = {
-  lng: number
   lat: number
+  lng: number
   alt: number
 }

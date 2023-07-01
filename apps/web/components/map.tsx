@@ -22,42 +22,57 @@ export default function SrMap({
     useShops()
 
   if (isLoadingShops) return
-  console.log(data)
-
-  function createSVGIcon(idx) {
-    return `
-      <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="12" cy="12" r="10" fill="rgb(${
-          idx * 20
-        }, 0, 0)" stroke="#fa1" stroke-width="2"/>
-      </svg>
-    `
-  }
-
-  function svgToDataURL(svg) {
-    return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
-  }
 
   const iconLayer = new IconLayer({
-    id: 'icon-layer',
-    data: [data].map((shop) => []),
-    getIcon: (d, { index }) => ({
-      url: svgToDataURL(createSVGIcon(index)),
-      width: 24,
-      height: 24,
+    id: 'IconLayer',
+    // data: 'https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/bart-stations.json',
+    data: data.map((shop) => {
+      return {
+        ...shop,
+        coordinates: [shop.location.lng, shop.location.lat],
+      }
     }),
-    sizeScale: 10,
-    getSize: (d) => 4,
-    getPosition: (d) => d,
-    // Enable picking
+
+    /* props from IconLayer class */
+
+    // alphaCutoff: 0.05,
+    // billboard: true,
+    // getAngle: 0,
+    getColor: (d) => [Math.sqrt(d.exits), 140, 0],
+    getIcon: (d) => 'marker',
+    // getPixelOffset: [0, 0],
+    getPosition: (d) => d.coordinates,
+    getSize: (d) => 5,
+    iconAtlas:
+      'https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/icon-atlas.png',
+    iconMapping: {
+      marker: {
+        x: 0,
+        y: 0,
+        width: 128,
+        height: 128,
+        anchorY: 128,
+        mask: true,
+      },
+    },
+    // onIconError: null,
+    // sizeMaxPixels: Number.MAX_SAFE_INTEGER,
+    // sizeMinPixels: 0,
+    sizeScale: 8,
+    // sizeUnits: 'pixels',
+    // textureParameters: null,
+
+    /* props inherited from Layer class */
+
+    // autoHighlight: false,
+    // coordinateOrigin: [0, 0, 0],
+    // coordinateSystem: COORDINATE_SYSTEM.LNGLAT,
+    // highlightColor: [0, 0, 128, 128],
+    // modelMatrix: null,
+    // opacity: 1,
     pickable: true,
-    // Update app state
-    onHover: (info) => {
-      // console.log(info)
-    },
-    onClick: (info) => {
-      console.log(info)
-    },
+    // visible: true,
+    // wrapLongitude: false,
   })
 
   const layers = [iconLayer]
@@ -68,7 +83,7 @@ export default function SrMap({
       initialViewState={INITIAL_VIEW_STATE}
       controller={true}
       getTooltip={(object) => {
-        // console.log(object)
+        console.log(object)
       }}
     >
       <Map
