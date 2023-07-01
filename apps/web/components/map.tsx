@@ -78,19 +78,26 @@ export default function SrMap({
   const layers = [iconLayer]
 
   return (
-    <DeckGL
-      layers={layers}
-      initialViewState={INITIAL_VIEW_STATE}
-      controller={true}
-      getTooltip={(object) => {
-        console.log(object)
-      }}
-    >
-      <Map
-        reuseMaps
-        mapStyle={mapStyle}
-        mapboxAccessToken={MapboxAccessToken}
+    <>
+      <link
+        href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css"
+        rel="stylesheet"
       />
-    </DeckGL>
+
+      <DeckGL
+        layers={layers}
+        initialViewState={INITIAL_VIEW_STATE}
+        controller={true}
+        getTooltip={(object) => {
+          console.log(object)
+        }}
+      >
+        <Map
+          reuseMaps
+          mapStyle={mapStyle}
+          mapboxAccessToken={MapboxAccessToken}
+        />
+      </DeckGL>
+    </>
   )
 }
