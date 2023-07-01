@@ -4,29 +4,16 @@ import {
   SHOP_URL,
   SANIRY_PROJECT_ID,
 } from '../constants/coin.contants'
+import { client } from './sanity.functions'
 
-export async function getShops(): Promise<{
-  result: Shop[]
-}> {
-  const res = await fetch(SHOPS_URL, { next: { revalidate: 60 } })
-
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')
-  }
-
-  return res.json()
+export async function getShops(): Promise<Shop[]> {
+  const shops = await client.fetch('*[_type == "shop"]')
+  return shops
 }
 
-export async function getShop(shopId: string) {
-  const url = SHOP_URL(shopId)
-  console.log(url)
-  const res = await fetch(url, { next: { revalidate: 60 } })
-
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')
-  }
-
-  return res.json()
+export async function getShop(shopId: string): Promise<Shop> {
+  const shops = await client.fetch(`*[_id=="${shopId}"]`)
+  return shops[0]
 }
 
 export function getSanityImgURL(ref: string) {

@@ -16,7 +16,7 @@ export default async function Page({ params: { lng } }) {
         </Link>
       </div>
       <div className="flex flex-wrap items-center ">
-        {shops.result.map((shop) => {
+        {shops.map((shop) => {
           return (
             <div key={shop._id} className="mr-4 mb-4 ">
               <Link href={`/${lng}/shops/${shop._id}`}>

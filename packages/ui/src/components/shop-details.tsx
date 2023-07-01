@@ -9,6 +9,7 @@ import { Shop } from '../types/shop.types'
 
 export interface ShopDetailsProps {
   shop: Shop
+  lng: any
   onShareClick?: (event: GestureResponderEvent) => void
 }
 
