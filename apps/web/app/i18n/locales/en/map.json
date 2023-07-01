@@ -2,6 +2,5 @@
   "title": "Stayreal Map",
   "counter_one": "one selected",
   "counter_other": "{{count}} selected",
-  "counter_zero": "none selected",
-  "back-to-home": "Back to homepage"
+  "counter_zero": "none selected"
 }

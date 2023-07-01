@@ -10,12 +10,6 @@ export default async function Page({ params: { lng } }) {
 
   return (
     <div className="flex flex-col p-8 md:p-12 xl:p-16">
-      <div className="mb-8">
-        <span className="mr-4 font-medium text-lg ">{t('title')}</span>
-        <Link href={`/${lng}`} className="text-sm">
-          {t('back-to-home')}
-        </Link>
-      </div>
       <div className="flex flex-wrap items-center ">
         {shops.map((shop) => {
           return (
