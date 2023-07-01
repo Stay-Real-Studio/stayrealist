@@ -1,26 +1,21 @@
 import * as React from 'react'
-import {
-  TouchableOpacity,
-  StyleSheet,
-  GestureResponderEvent,
-  Text,
-} from 'react-native'
+import { TouchableOpacity, StyleSheet, Text } from 'react-native'
 import { Shop } from '../types/shop.types'
 
 export interface ShopDetailsProps {
   shop: Shop
   lng: any
-  onShareClick?: (event: GestureResponderEvent) => void
 }
 
-export function ShopDetails({ shop, onShareClick }: ShopDetailsProps) {
+export function ShopDetails({ shop }: ShopDetailsProps) {
+  console.log(shop)
   return (
     <>
       <Text style={styles.text}>{shop.name}</Text>
+      <Text style={styles.text}>Share {shop.name}</Text>
 
-      <TouchableOpacity style={styles.button} onPress={onShareClick}>
-        <Text style={styles.text}>Share {shop.name}</Text>
-      </TouchableOpacity>
+      {/* <TouchableOpacity style={styles.button} onPress={onShareClick}>
+      </TouchableOpacity> */}
     </>
   )
 }
