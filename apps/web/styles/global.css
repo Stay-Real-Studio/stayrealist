@@ -1,17 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer components {
+    .logo {
+        @apply bg-clip-text bg-gradient-to-br from-cyan-500 to-pink-500;
+        font-family: '微软雅黑', 'ui-sans-serif', 'system-ui', '-apple-system';
+        -webkit-text-fill-color: transparent;
+    }
+}
 
 body {
-  font-family: 'SF Pro Text', 'SF Pro Icons', 'Helvetica Neue', 'Helvetica',
-    'Arial', sans-serif;
-  display: flex;
-  height: 100vh;
-  align-items: center;
-  justify-content: center;
+    font-family: 'SF Pro Text', 'SF Pro Icons', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
 }
 
-.logo {
-  font-family: '微软雅黑', 'ui-sans-serif', 'system-ui', '-apple-system';
-  -webkit-text-fill-color: transparent;
-}
+
+/* .logo {
+    font-family: '微软雅黑', 'ui-sans-serif', 'system-ui', '-apple-system';
+    -webkit-text-fill-color: transparent;
+} */

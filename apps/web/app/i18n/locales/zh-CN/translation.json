@@ -1,6 +1,9 @@
 {
-  "title": "你好",
-  "to-shops-page": "商家列表",
-  "to-map-page": "前往地图",
-  "back-to-home": "回到首页"
+    "title": "你好",
+    "to-shops-page": "商家列表",
+    "to-map-page": "前往地图",
+    "back-to-home": "回到首页",
+    "logo": "至真列表",
+    "contact-us": "联系我们",
+    "FAQ": "FAQ"
 }
