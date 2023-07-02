@@ -31,7 +31,7 @@ export async function generateMetadata(
 
 export default async function Page({ params: { lng, shopId } }: Props) {
   const { t } = await useTranslation(lng)
-  const shop = await getShop(shopId)
+  const shop: Shop = await getShop(shopId)
 
   return (
     <div className="flex flex-col">

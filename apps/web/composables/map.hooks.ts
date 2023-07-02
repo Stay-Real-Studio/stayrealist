@@ -18,9 +18,5 @@ export const useData = () => {
 export const useShops = () => {
   return useQuery(['shops'], getShops, {
     refetchOnWindowFocus: false,
-    select(data) {
-      console.log(data)
-      return data
-    },
   })
 }

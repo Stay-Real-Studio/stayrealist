@@ -12,18 +12,26 @@ import {
 import { useShops } from '../composables/map.hooks'
 import { useState } from 'react'
 import { Shop } from 'ui'
+import ShopDetails from './shop/shop-details.client'
+import { LanguageType } from '../types/i18n.types'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 export default function SrMap({
   strokeWidth = 1,
   mapStyle = MAP_STYLE,
+  lng,
 }: {
+  lng: LanguageType
   strokeWidth?: number
   mapStyle?: string
 }) {
-  const [isPopupShow, setIsPopupShow] = useState<boolean>(false)
   const [currShop, setCurrShop] = useState<Shop | undefined>(undefined)
   const { isLoading: isLoadingShops, data }: { isLoading: boolean; data } =
     useShops()
+
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const router = useRouter()
 
   if (isLoadingShops) return
 
@@ -78,10 +86,25 @@ export default function SrMap({
     pickable: true,
     // visible: true,
     // wrapLongitude: false,
+
+    onHover: (info, event) => {
+      if (!data) return
+      if (!info.object) return
+
+      if (!info.object._id) return
+      data.map((shop: Shop) => {
+        if (shop._id == info.object._id) {
+          setCurrShop(shop)
+        }
+      })
+    },
+    onClick: (info, event) => {
+      console.log(info)
+      router.push(`/${lng}/shops/${info.object._id}`)
+    },
   })
 
   const layers = [iconLayer]
-  console.log(currShop)
 
   return (
     <>
@@ -94,37 +117,26 @@ export default function SrMap({
         layers={layers}
         initialViewState={INITIAL_VIEW_STATE}
         controller={true}
-        getTooltip={(object) => {
-          if (!data) return
-          if (!object.object) {
-            setCurrShop(undefined)
-            return
-          }
-
-          if (!object.object._id) return
-          data.map((shop: Shop) => {
-            if (shop._id == object.object._id) {
-              setCurrShop(shop)
-            }
-          })
-        }}
       >
         <Map
           reuseMaps
           mapStyle={mapStyle}
           mapboxAccessToken={MapboxAccessToken}
         >
-          {currShop && (
-            <Popup
-              longitude={currShop.location.lng}
-              latitude={currShop.location.lat}
-              anchor="bottom"
-              onClose={() => {
-                console.log('here')
-              }}
-            >
-              You are here
-            </Popup>
+          {currShop && currShop.location && (
+            <>
+              <Popup
+                longitude={currShop.location.lng}
+                latitude={currShop.location.lat}
+                anchor="bottom"
+                offset={23}
+                onClose={() => {
+                  setCurrShop(undefined)
+                }}
+              >
+                <ShopDetails shop={currShop} lng={lng}></ShopDetails>
+              </Popup>
+            </>
           )}
         </Map>
       </DeckGL>

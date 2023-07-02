@@ -7,5 +7,6 @@ export async function getShops(): Promise<Shop[]> {
 }
 
 export async function getShop(shopId: string): Promise<Shop> {
-  return client.fetch(`*[_id=="${shopId}"]`)
+  const results = await client.fetch(`*[_id=="${shopId}"]`)
+  return results[0]
 }
