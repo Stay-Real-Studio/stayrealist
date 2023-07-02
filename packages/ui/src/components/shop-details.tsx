@@ -8,7 +8,6 @@ export interface ShopDetailsProps {
 }
 
 export function ShopDetails({ shop }: ShopDetailsProps) {
-  console.log(shop)
   return (
     <>
       <Text style={styles.text}>{shop.name}</Text>

@@ -8,5 +8,5 @@ export default function Page({
 }: {
   params: { lng: LanguageType }
 }) {
-  return <SrMap />
+  return <SrMap lng={lng} />
 }

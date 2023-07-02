@@ -1,7 +1,5 @@
-export type sanityRef = {
-  _type: string
-  asset: {
-    _ref: string
-    _type: string
-  }
+export type SanityGeopoint = {
+  lat: number
+  lng: number
+  alt: number
 }

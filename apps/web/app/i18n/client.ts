@@ -23,7 +23,7 @@ i18next
     preload: runsOnServerSide ? languages : []
   })
 
-export function useTranslation(lng, ns, options={}) {
+export function useTranslation(lng, ns='translation', options={}) {
   const ret = useTranslationOrg(ns, options)
   const { i18n } = ret
   if (runsOnServerSide && i18n.resolvedLanguage !== lng) {
