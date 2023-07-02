@@ -23,7 +23,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function LanguageList({ className, lng }) {
+export default function LanguageList({ lng }) {
   const [selected, setSelected] = useState<LanguageOption>(
     lng == LanguageType.English ? languageOptions[0] : languageOptions[1]
   )
@@ -41,7 +41,7 @@ export default function LanguageList({ className, lng }) {
     >
       {({ open }) => (
         <>
-          <div className={clsx('relative mt-2 w-32', className)}>
+          <div className={clsx('relative w-32')}>
             <Listbox.Button className="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
               <span className="block truncate">{selected.displayName}</span>
               <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
