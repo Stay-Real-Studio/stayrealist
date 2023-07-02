@@ -35,7 +35,7 @@ export const Header = async ({ lng }) => {
           ))}
         </div>
         <div className="flex justify-center items-center w-40">
-          <LanguageList className={''} lng={lng} />
+          <LanguageList lng={lng} />
         </div>
       </header>
     </>
