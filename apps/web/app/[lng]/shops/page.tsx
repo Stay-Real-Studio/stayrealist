@@ -7,7 +7,6 @@ import { builder } from '../../../composables/sanity.functions'
 export default async function Page({ params: { lng } }) {
   const { t } = await useTranslation(lng, 'shop')
   const shops = await getShops()
-  console.log(shops)
 
   return (
     <div className="flex flex-col p-8 md:p-12 xl:p-16">

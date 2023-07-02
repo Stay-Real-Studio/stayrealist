@@ -99,7 +99,6 @@ export default function SrMap({
       })
     },
     onClick: (info, event) => {
-      console.log(info)
       router.push(`/${lng}/shops/${info.object._id}`)
     },
   })

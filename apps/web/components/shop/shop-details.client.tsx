@@ -68,12 +68,7 @@ export default function ShopDetails({
             <dd className="text-sm leading-6 text-gray-500">Accept</dd>
           </div>
         </dl>
-        <div
-          className="mt-6 border-t border-gray-900/5 px-6 py-6"
-          onClick={(e) => {
-            console.log('hera')
-          }}
-        >
+        <div className="mt-6 border-t border-gray-900/5 px-6 py-6">
           <Link
             href={`/${lng}/shops/${shop._id}`}
             className="text-sm font-semibold leading-6 text-gray-900"
