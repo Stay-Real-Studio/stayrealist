@@ -1,5 +1,4 @@
 import { useTranslation } from '../../../i18n'
-import { Footer } from '../../../../components/Footer'
 import { getShop } from '../../../../composables/shop.functions'
 import { Shop } from 'ui'
 import { Metadata, ResolvingMetadata } from 'next'
@@ -41,8 +40,6 @@ export default async function Page({ params: { lng, shopId } }: Props) {
       <div className="m-4">
         Share {shop.displayName}: <ShareButtons shop={shop} lng={lng} />
       </div>
-
-      <Footer lng={lng} />
     </div>
   )
 }

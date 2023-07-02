@@ -1,12 +1,8 @@
 import Link from 'next/link'
 import { useTranslation } from '../i18n'
-// import { Footer } from '../../components/Footer'
 import Image from 'next/image'
 import iconLayerPNG from '../../assets/images/map/iconLyaer.png'
 import shopListPNG from '../../assets/images/map/shopList.png'
-// import { CnLogo } from '../../components/logos/CnLogo'
-// import { EnLogo } from '../../components/logos/EnLogo'
-// import { LanguageType } from '../../types/i18n.types'
 
 export default async function Page({ params: { lng } }) {
   const { t } = await useTranslation(lng)
