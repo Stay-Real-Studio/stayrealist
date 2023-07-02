@@ -24,7 +24,7 @@ export const Header = async ({ lng }) => {
             </a>
           ))}
         </div>
-        <LanguageList className={'w-40'} />
+        <LanguageList className={'w-40'} lng={lng}/>
       </header>
     </>
   )
