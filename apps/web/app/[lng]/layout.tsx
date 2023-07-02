@@ -1,7 +1,6 @@
 import { dir } from 'i18next'
 import Providers from '../../components/providers'
 import { ReactNode } from 'react'
-import { Footer } from '../../components/Footer'
 import { Header } from '../../components/Header'
 
 const languages = ['en', 'zh-CN']
@@ -24,7 +23,6 @@ export default function RootLayout({
           <Header lng={lng} />
           {children}
         </Providers>
-        {/* <Footer lng={lng} /> */}
       </body>
     </html>
   )
