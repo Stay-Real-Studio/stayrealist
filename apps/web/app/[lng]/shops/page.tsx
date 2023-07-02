@@ -2,8 +2,7 @@ import Link from 'next/link'
 import { useTranslation } from '../../i18n'
 import { getShops } from '../../../composables/shop.functions'
 import { builder } from '../../../composables/sanity.functions'
-// import { Header } from '../../../components/Header'
-// import Image from 'next/image'
+import Image from 'next/image'
 
 export default async function Page({ params: { lng } }) {
   const { t } = await useTranslation(lng, 'shop')
@@ -11,16 +10,15 @@ export default async function Page({ params: { lng } }) {
 
   return (
     <>
-      {/* <Header lng={lng} /> */}
       <div className="flex flex-col p-8 md:p-12 xl:p-16">
-        <div className="flex flex-wrap items-center ">
+        <div className="flex flex-wrap items-center">
           {shops.map((shop) => {
             return (
               <div key={shop._id} className="mr-4 mb-4 ">
                 <Link href={`/${lng}/shops/${shop._id}`}>
                   <span>Go to {shop.name}</span>
                   {shop.logo ? (
-                    <img
+                    <Image
                       src={builder
                         .image(shop.logo)
                         .width(256)
