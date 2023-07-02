@@ -8,9 +8,5 @@ export default function Page({
 }: {
   params: { lng: LanguageType }
 }) {
-  return (
-    <div className="overflow-hidden">
-      <SrMap lng={lng} />
-    </div>
-  )
+  return <SrMap lng={lng} />
 }
