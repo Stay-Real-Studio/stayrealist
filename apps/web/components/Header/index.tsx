@@ -19,22 +19,11 @@ export const Header = async ({ lng }) => {
     <>
       <header className="flex w-full fixed justify-between py-8 top-0 items-center z-10 px-8 bg-white">
         <div className="w-16 sm:w-48 flex items-center">
-          <Link href={`/${lng}/`}>
-            <Image
-              className="rounded-full w-8 h-8 cursor-pointer"
-              src={LogoJPG}
-              width={100}
-              height={100}
-              alt={'logo'}
-            />
-          </Link>
-          <span className="logo hidden sm:inline-block text-sm sm:text-base">
-            {lng === LanguageType.English ? (
-              <EnLogo lng={lng} />
-            ) : (
-              <CnLogo lng={lng} />
-            )}
-          </span>
+          {lng === LanguageType.English ? (
+            <EnLogo lng={lng} />
+          ) : (
+            <CnLogo lng={lng} />
+          )}
         </div>
 
         <div className="sm:text-base text-sm hidden sm:flex sm:gap-x-2 md:gap-x-5 lg:gap-x-10 flex-1 justify-center items-center">

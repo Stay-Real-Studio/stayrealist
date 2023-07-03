@@ -32,7 +32,6 @@ export async function generateMetadata(
 export default async function Page({ params: { lng, shopId } }: Props) {
   const { t } = await useTranslation(lng)
   const shop: Shop = await getShop(shopId)
-  console.log(shop, 'shop-detail')
 
   return (
     <div className="flex flex-col p-8">
@@ -42,6 +41,12 @@ export default async function Page({ params: { lng, shopId } }: Props) {
         </span>
         <span className="text-sm sm:text-base"> 详情:</span>
       </h1>
+      <div className="m-4">
+        <span className="text-sm sm:text-base font-medium mr-4">
+          Shop email:
+        </span>
+        <span className="">To be confirmed</span>
+      </div>
       <div className="m-4">
         <span className="text-sm sm:text-base font-medium mr-4">
           Phone number:
@@ -63,12 +68,6 @@ export default async function Page({ params: { lng, shopId } }: Props) {
             <></>
           )}
         </span>
-      </div>
-      <div className="m-4">
-        <span className="text-sm sm:text-base font-medium mr-4">
-          Shop email:
-        </span>
-        <span className="">To be confirmed</span>
       </div>
 
       <div className="m-4 sm:flex-center sm:flex-wrap flex-column">
