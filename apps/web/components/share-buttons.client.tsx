@@ -20,7 +20,7 @@ export const ShareButtons = ({ lng, shop }: { lng: any; shop: Shop }) => {
   const url = `https://www.stayrealist.com/${lng}/shops/${shop._id}`
   const title = `${shop.name} is recommanded by Stayrealist`
   return (
-    <>
+    <div className="flex-center flex-wrap">
       <div className="mr-4">
         <WhatsappShareButton url={url} title={title} separator=":: ">
           <WhatsappIcon size={32} round />
@@ -55,6 +55,6 @@ export const ShareButtons = ({ lng, shop }: { lng: any; shop: Shop }) => {
           <WeiboIcon size={32} round />
         </WeiboShareButton>
       </div>
-    </>
+    </div>
   )
 }

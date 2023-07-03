@@ -35,7 +35,7 @@ export default async function Page({ params: { lng, shopId } }: Props) {
   console.log(shop, 'shop-detail')
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col p-8">
       <h1>
         <span className="font-medium text-base sm:text-lg mr-2">
           {shop.displayName}
@@ -71,9 +71,11 @@ export default async function Page({ params: { lng, shopId } }: Props) {
         <span className="">To be confirmed</span>
       </div>
 
-      <div className="m-4 flex-center">
-        <span className="text-sm sm:text-base font-medium ">Share</span>
-        <span className="mx-4">{shop.displayName}: </span>
+      <div className="m-4 sm:flex-center sm:flex-wrap flex-column">
+        <div className="">
+          <span className="text-sm sm:text-base font-medium ">Share</span>
+          <span className="mx-4">{shop.displayName}: </span>
+        </div>
 
         <ShareButtons shop={shop} lng={lng} />
       </div>
