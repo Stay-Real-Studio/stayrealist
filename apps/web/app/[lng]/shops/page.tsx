@@ -7,12 +7,14 @@ import Image from 'next/image'
 export default async function Page({ params: { lng } }) {
   const { t } = await useTranslation(lng, 'shop')
   const shops = await getShops()
+  console.log(shops.result)
+  // console.log(shops)
 
   return (
     <>
       <div className="flex flex-col p-8 md:p-12 xl:p-16">
         <div className="flex flex-wrap items-center">
-          {shops.map((shop) => {
+          {shops.result.map((shop) => {
             return (
               <div key={shop._id} className="mr-4 mb-4 ">
                 <Link href={`/${lng}/shops/${shop._id}`}>
