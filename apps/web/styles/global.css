@@ -7,6 +7,9 @@
         font-family: '微软雅黑', 'ui-sans-serif', 'system-ui', '-apple-system';
         -webkit-text-fill-color: transparent;
     }
+    .flex-center {
+        @apply flex justify-center items-center;
+    }
 }
 
 body {
