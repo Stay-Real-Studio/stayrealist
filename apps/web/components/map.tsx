@@ -29,8 +29,6 @@ export default function SrMap({
   const { isLoading: isLoadingShops, data }: { isLoading: boolean; data } =
     useShops()
 
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
   const router = useRouter()
 
   if (isLoadingShops) return
@@ -38,7 +36,7 @@ export default function SrMap({
   const iconLayer = new IconLayer({
     id: 'IconLayer',
     // data: 'https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/bart-stations.json',
-    data: data.map((shop) => {
+    data: data.result.map((shop) => {
       if (!shop.location) return shop
       return {
         ...shop,
@@ -92,7 +90,7 @@ export default function SrMap({
       if (!info.object) return
 
       if (!info.object._id) return
-      data.map((shop: Shop) => {
+      data.result.map((shop: Shop) => {
         if (shop._id == info.object._id) {
           setCurrShop(shop)
         }
