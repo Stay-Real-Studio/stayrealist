@@ -6,4 +6,7 @@ export type Shop = {
   displayName: string
   logo: any
   location: SanityGeopoint
+  email: string
+  phoneNumber: string
+  website: string
 }

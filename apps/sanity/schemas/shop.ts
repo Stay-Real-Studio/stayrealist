@@ -15,6 +15,21 @@ export default {
       title: 'Display Name',
     },
     {
+      name: 'email',
+      type: 'string',
+      title: 'Email',
+    },
+    {
+      name: 'phoneNumber',
+      type: 'string',
+      title: 'Phone number',
+    },
+    {
+      name: 'website',
+      type: 'string',
+      title: 'Website',
+    },
+    {
       title: 'Shop Location',
       name: 'location',
       type: 'geopoint',
