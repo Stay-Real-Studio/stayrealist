@@ -18,7 +18,7 @@ export const Header = async ({ lng }) => {
   return (
     <>
       <header className="flex w-full fixed justify-between py-8 top-0 items-center z-10 px-8 bg-white">
-        <div className="w-16 sm:w-48 flex items-center">
+        <div className="w-48 sm:w-48 flex items-center">
           {lng === LanguageType.English ? (
             <EnLogo lng={lng} />
           ) : (
