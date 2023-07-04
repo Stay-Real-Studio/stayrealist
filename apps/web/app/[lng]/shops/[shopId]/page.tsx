@@ -5,6 +5,7 @@ import { Metadata, ResolvingMetadata } from 'next'
 import { ShareButtons } from '../../../../components/share-buttons.client'
 import { builder } from '../../../../composables/sanity.functions'
 import Image from 'next/image'
+import Link from 'next/link'
 
 type Props = { params: { lng: any; shopId: any }; searchParams: any }
 export async function generateMetadata(
@@ -41,33 +42,45 @@ export default async function Page({ params: { lng, shopId } }: Props) {
         </span>
         <span className="text-sm sm:text-base"> 详情:</span>
       </h1>
+      <div className="m-4 flex items-center">
+        <span className="text-sm sm:text-base font-medium mr-4">logo:</span>
+        {shop.logo ? (
+          <Image
+            src={builder.image(shop.logo).width(256).height(256).url()}
+            width={1000}
+            height={1000}
+            alt="map icon"
+            className="object-cover rounded-full w-48 h-48  border-solid border-slate-100 border"
+          />
+        ) : (
+          <></>
+        )}
+      </div>
       <div className="m-4">
         <span className="text-sm sm:text-base font-medium mr-4">
           Shop email:
         </span>
-        <span className="">To be confirmed</span>
+        {shop.email ? shop.email : <span className="">To be confirmed</span>}
       </div>
       <div className="m-4">
         <span className="text-sm sm:text-base font-medium mr-4">
-          Phone number:
+          phone number:
         </span>
-        <span className="">To be confirmed</span>
+        {shop.phoneNumber ? (
+          shop.phoneNumber
+        ) : (
+          <span className="">To be confirmed</span>
+        )}
       </div>
-      <div className="m-4 flex items-center">
-        <span className="text-sm sm:text-base font-medium mr-4">logo:</span>
-        <span className="">
-          {shop.logo ? (
-            <Image
-              src={builder.image(shop.logo).width(256).height(256).url()}
-              width={1000}
-              height={1000}
-              alt="map icon"
-              className="object-cover rounded-full w-48 h-48  border-solid border-slate-100 border"
-            />
-          ) : (
-            <></>
-          )}
-        </span>
+      <div className="m-4">
+        <span className="text-sm sm:text-base font-medium mr-4">Website:</span>
+        {shop.website ? (
+          <Link href={shop.website} target="_blank">
+            {shop.website}
+          </Link>
+        ) : (
+          <span className="">To be confirmed</span>
+        )}
       </div>
 
       <div className="m-4 sm:flex-center sm:flex-wrap flex-column">
