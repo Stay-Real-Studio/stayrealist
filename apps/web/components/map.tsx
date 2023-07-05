@@ -1,9 +1,11 @@
 'use client'
 
 import React from 'react'
-import { Map, Popup } from 'react-map-gl'
+import { Map, Popup, useControl } from 'react-map-gl'
 import DeckGL from '@deck.gl/react'
 import { IconLayer } from '@deck.gl/layers'
+import { MapboxOverlay, MapboxOverlayProps } from '@deck.gl/mapbox/typed'
+
 import {
   INITIAL_VIEW_STATE,
   MAP_STYLE,
@@ -15,6 +17,16 @@ import { Shop } from 'ui'
 import ShopDetails from './shop/shop-details.client'
 import { LanguageType } from '../types/i18n.types'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+
+function DeckGLOverlay(
+  props: MapboxOverlayProps & {
+    interleaved?: boolean
+  }
+) {
+  const overlay = useControl<MapboxOverlay>(() => new MapboxOverlay(props))
+  overlay.setProps(props)
+  return null
+}
 
 export default function SrMap({
   strokeWidth = 1,
@@ -58,7 +70,7 @@ export default function SrMap({
       'https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/icon-atlas.png',
     iconMapping: {
       marker: {
-        x: 0,
+        x: 128,
         y: 0,
         width: 128,
         height: 128,
@@ -69,7 +81,7 @@ export default function SrMap({
     // onIconError: null,
     // sizeMaxPixels: Number.MAX_SAFE_INTEGER,
     // sizeMinPixels: 0,
-    sizeScale: 8,
+    sizeScale: 5,
     // sizeUnits: 'pixels',
     // textureParameters: null,
 
@@ -109,34 +121,34 @@ export default function SrMap({
         href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css"
         rel="stylesheet"
       />
-
-      <DeckGL
-        layers={layers}
-        initialViewState={INITIAL_VIEW_STATE}
-        controller={true}
+      <Map
+        initialViewState={{
+          latitude: 40,
+          longitude: -74.5,
+          zoom: 12,
+        }}
+        reuseMaps
+        mapStyle={mapStyle}
+        mapboxAccessToken={MapboxAccessToken}
       >
-        <Map
-          reuseMaps
-          mapStyle={mapStyle}
-          mapboxAccessToken={MapboxAccessToken}
-        >
-          {currShop && currShop.location && (
-            <>
-              <Popup
-                longitude={currShop.location.lng}
-                latitude={currShop.location.lat}
-                anchor="bottom"
-                offset={23}
-                onClose={() => {
-                  setCurrShop(undefined)
-                }}
-              >
-                <ShopDetails shop={currShop} lng={lng}></ShopDetails>
-              </Popup>
-            </>
-          )}
-        </Map>
-      </DeckGL>
+        <DeckGLOverlay layers={layers} />
+
+        {currShop && currShop.location && (
+          <>
+            <Popup
+              longitude={currShop.location.lng}
+              latitude={currShop.location.lat}
+              anchor="bottom"
+              offset={23}
+              onClose={() => {
+                setCurrShop(undefined)
+              }}
+            >
+              <ShopDetails shop={currShop} lng={lng}></ShopDetails>
+            </Popup>
+          </>
+        )}
+      </Map>
     </>
   )
 }
