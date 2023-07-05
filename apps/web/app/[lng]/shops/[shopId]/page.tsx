@@ -6,6 +6,7 @@ import { ShareButtons } from '../../../../components/share-buttons.client'
 import { builder } from '../../../../composables/sanity.functions'
 import Image from 'next/image'
 import Link from 'next/link'
+import toWebsitePNG from '../../../../assets/images/toWebsite.png'
 
 type Props = { params: { lng: any; shopId: any }; searchParams: any }
 export async function generateMetadata(
@@ -93,7 +94,7 @@ export default async function Page({ params: { lng, shopId } }: Props) {
               <dt className="text-sm font-medium leading-6 text-gray-900">
                 Website:
               </dt>
-              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 flex  items-center">
                 {shop.website ? (
                   <Link href={shop.website} target="_blank">
                     {shop.website}
@@ -101,6 +102,15 @@ export default async function Page({ params: { lng, shopId } }: Props) {
                 ) : (
                   <span className="">To be confirmed</span>
                 )}
+                <Link href={shop.website ? shop.website : ''} target="_blank">
+                  <Image
+                    src={toWebsitePNG}
+                    width={24}
+                    height={24}
+                    alt="toWebsite"
+                    className="ml-2 w-4 h-4 cursor-pointer"
+                  ></Image>
+                </Link>
               </dd>
             </div>
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
