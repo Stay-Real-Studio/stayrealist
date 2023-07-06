@@ -102,15 +102,19 @@ export default async function Page({ params: { lng, shopId } }: Props) {
                 ) : (
                   <span className="">To be confirmed</span>
                 )}
-                <Link href={shop.website ? shop.website : ''} target="_blank">
-                  <Image
-                    src={toWebsitePNG}
-                    width={24}
-                    height={24}
-                    alt="toWebsite"
-                    className="ml-2 w-4 h-4 cursor-pointer"
-                  ></Image>
-                </Link>
+                {shop.website ? (
+                  <Link href={shop.website} target="_blank">
+                    <Image
+                      src={toWebsitePNG}
+                      width={24}
+                      height={24}
+                      alt="toWebsite"
+                      className="ml-2 w-4 h-4 cursor-pointer"
+                    ></Image>
+                  </Link>
+                ) : (
+                  <></>
+                )}
               </dd>
             </div>
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
