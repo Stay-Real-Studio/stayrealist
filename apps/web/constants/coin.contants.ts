@@ -4,3 +4,10 @@ export const COINS_URL = `${SANIRY_BASE_URL}?query=*[_type=='coin']`
 export const SHOPS_URL = `${SANIRY_BASE_URL}?query=*[_type=='shop']`
 export const SHOP_URL = (shopId: string) =>
   `${SANIRY_BASE_URL}?query=*[_id=='${shopId}']`
+
+export const COIN_MAP = {
+  H: 'Himalaya Coin',
+  E: 'Ethernet',
+  G: 'GETTR Coin',
+  B: 'Bitcoin',
+}

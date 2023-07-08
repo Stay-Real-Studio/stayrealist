@@ -9,4 +9,9 @@ export type Shop = {
   email: string
   phoneNumber: string
   website: string
+  coins?: string[]
+}
+
+export type Coin = {
+  name: string
 }
