@@ -1,6 +1,12 @@
 import { useTranslation } from '../../../i18n'
-import { getShop } from '../../../../composables/shop.functions'
-import { Shop } from 'ui'
+import {
+  getShop,
+  getCoins,
+  AcceptCoins,
+  getCoinCls,
+} from '../../../../composables/shop.functions'
+import { COIN_MAP } from '../../../../constants/coin.contants'
+import { Shop, Coin } from 'ui'
 import { Metadata, ResolvingMetadata } from 'next'
 import { ShareButtons } from '../../../../components/share-buttons.client'
 import { builder } from '../../../../composables/sanity.functions'
@@ -34,6 +40,7 @@ export async function generateMetadata(
 export default async function Page({ params: { lng, shopId } }: Props) {
   const { t } = await useTranslation(lng)
   const shop: Shop = await getShop(shopId)
+  const coinsList: Coin[] = await getCoins()
 
   return (
     <>
@@ -63,6 +70,29 @@ export default async function Page({ params: { lng, shopId } }: Props) {
                   />
                 ) : (
                   <></>
+                )}
+              </dd>
+            </div>
+            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0 ">
+              <dt className="text-sm font-medium leading-6 text-gray-900">
+                Accept coins:
+              </dt>
+              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                {shop?.coins?.length ? (
+                  AcceptCoins(coinsList).map((coin: string, i: number) => (
+                    <span
+                      key={i}
+                      className={`${getCoinCls(
+                        coin,
+                        shop?.coins
+                      )} mr-4 px-2 leading-6 text-center inline-block hover:text-amber-500 hover:bg-lime-200 rounded-full`}
+                      title={COIN_MAP[coin]}
+                    >
+                      {coin}
+                    </span>
+                  ))
+                ) : (
+                  <span className="">To be confirmed</span>
                 )}
               </dd>
             </div>
